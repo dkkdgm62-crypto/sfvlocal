@@ -221,7 +221,7 @@ html {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  width: 20%;
+  width: 25%;
   height: 100%;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -1068,222 +1068,6 @@ select.inp option {
       </div>
     </section>
 
-    </section>
-
-    <!-- 🧭 BEREICH: SPIELKOMPASS & TRAININGSPLANER -->
-    <section id="section-spielkompass" class="app-section">
-      <div class="card" style="background: linear-gradient(135deg, #111d2e, #131424); border-left: 4px solid var(--accent-blue);">
-        <h3 class="card-title" style="color: var(--accent-blue); font-size: 15px; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-          <svg style="width:18px;height:18px;stroke:var(--accent-blue);fill:none;" viewBox="0 0 24 24" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.6-5.6 2 2-5.6 5.6-2z"/></svg>
-          Didaktischer Spielkompass
-        </h3>
-        <p style="font-size: 11px; color: var(--text-muted); line-height: 1.5;">
-          Unsere Vereins-DNA und Ausbildungsphilosophie. Klicke auf die Phasen, um die Details, Prinzipien und die Zonen-Umsetzung anzuzeigen.
-        </p>
-      </div>
-
-      <!-- INTERAKTIVER SPIELKOMPASS AKKORDEONS -->
-      <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-        
-        <!-- PHASE A: Wir haben den Ball -->
-        <div class="card" style="border-left: 4px solid #f59e0b; padding: 12px; background: rgba(245, 158, 11, 0.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-          <div onclick="toggleKompassPhase('ball-besitz')" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-            <h4 style="font-size: 11.5px; font-weight: 900; color: #f59e0b;">🟠 Wir haben den Ball: Spiel gestalten – Tor erzielen</h4>
-            <svg id="kompass-chevron-ball-besitz" style="width:16px; height:16px; stroke:#f59e0b; fill:none; transition: transform 0.2s;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div id="kompass-content-ball-besitz" style="display: none; margin-top: 10px; font-size: 10px; line-height: 1.5; color: var(--text-main);">
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #f59e0b;">Ziele:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Initiativ sein, dynamisch nach vorne spielen.</li>
-                <li>Eigenes Spiel durchsetzen und Gegner dominieren.</li>
-                <li>Lösungen finden, Spiel beschleunigen und Tore erzielen.</li>
-              </ul>
-            </div>
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #f59e0b;">Prinzipien:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Alle 11 Spieler beteiligen sich am Offensivspiel – zusammen angreifen, Überzahlsituationen schaffen, Gegner ins Ungleichgewicht bringen.</li>
-                <li>Optimale Feldbesetzung: Breite und Tiefe nutzen und Lösungen anbieten, getimtes Freilaufen (Dreiecks- und Rhombusbildung).</li>
-                <li>Den Spielrhythmus unter Berücksichtigung von Raum und Zeit bestimmen: den direkten Weg zum gegnerischen Tor suchen (Spiel beschleunigen) oder konstruktiver, dynamischer Spielaufbau mit Geduld.</li>
-                <li>Duell suchen und gewinnen (Zone 2 und 3).</li>
-                <li>Ideale Position einnehmen, um bei einem möglichen Ballverlust den Gegenangriff zu verhindern.</li>
-              </ul>
-            </div>
-            <div>
-              <strong style="color: #f59e0b;">Umsetzung nach Zonen:</strong>
-              <div style="margin-top: 4px; padding-left: 6px; border-left: 2px solid rgba(245, 158, 11, 0.3);">
-                <strong>Zone 1 – Spiel aufbauen:</strong> Breite nutzen &amp; präzise Pässe mit Variation kurz, lang oder diagonal. Initiative der Innenverteidiger und Einbezug der zentralen Mittelfeldspieler. Freilaufbewegungen, Orientierung, Signale erkennen. Einen «Zielspieler» einbeziehen. Den freien Raum erkennen und nutzen; Pass oder Dribbling in Zone 2. Wenn nicht möglich: Vorbereitete lange Bälle vertikal, mit dem Ziel Ballgewinn (2. Ball).
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 2 – Spiel bestimmen:</strong> Spiel zwischen den Linien (Vertikalpass) mit Dreiecks- und Rhombusbildung (Einbezug der Stürmer). Gegner fixieren im 1:1, Spielverlagerung (Diagonal) oder Dribbling in den freien Raum. Dosierte, präzise Pässe und Timing der Freilaufbewegungen. Vertikales Spiel, «Zielspieler» finden. Räume schaffen und besetzen, Signale erkennen.
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 3/BOX – Angriff abschliessen:</strong> Den freien Raum nutzen, um in Richtung gegnerisches Tor zu gelangen und abzuschliessen. Kombinationsspiel mit hoher Intensität: Doppelpass, Hinterlaufen, Kreuzen, Virgola, Spiel über Dritte (Lösungen im Rücken der gegnerischen Abwehr finden). Besetzung der Box: Entschlossenheit und Qualität im Abschluss. Sprints, Signale erkennen, 1:1.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PHASE B: Wir verlieren den Ball -->
-        <div class="card" style="border-left: 4px solid #ef4444; padding: 12px; background: rgba(239, 68, 68, 0.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-          <div onclick="toggleKompassPhase('ball-verlust')" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-            <h4 style="font-size: 11.5px; font-weight: 900; color: #ef4444;">🔴 Wir verlieren den Ball: Umschalten OFF – DEF</h4>
-            <svg id="kompass-chevron-ball-verlust" style="width:16px; height:16px; stroke:#ef4444; fill:none; transition: transform 0.2s;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div id="kompass-content-ball-verlust" style="display: none; margin-top: 10px; font-size: 10px; line-height: 1.5; color: var(--text-main);">
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #ef4444;">Ziele:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Initiative behalten, weiterhin agieren.</li>
-                <li>Spielsituation rasch erkennen und blitzschnell entscheiden.</li>
-                <li>Raum und Zeit für den Gegner einschränken, um Gegentor zu verhindern.</li>
-              </ul>
-            </div>
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #ef4444;">Prinzipien:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Den schnellen Gegenangriff verhindern (1. oder 2. Pass des Gegners nach vorne blockieren) und den direkten Weg zum eigenen Tor schliessen.</li>
-                <li>Sofort individuelle Position einnehmen, um rasch das kollektive Gleichgewicht zu erlangen.</li>
-                <li>Den ballführenden Spieler des Gegners sofort unter Druck setzen (Prinzip der 3 Kreise).</li>
-                <li>Wenn nicht möglich, dann: Rasche Blockbildung, um den Ball gemeinsam zu erobern.</li>
-                <li>Duell suchen und gewinnen.</li>
-              </ul>
-            </div>
-            <div>
-              <strong style="color: #ef4444;">Umsetzung nach Zonen:</strong>
-              <div style="margin-top: 4px; padding-left: 6px; border-left: 2px solid rgba(239, 68, 68, 0.3);">
-                <strong>Zone 1/BOX – Tor verteidigen:</strong> Direkten Weg zum Tor schützen. So schnell wie möglich Überzahl in Ballnähe schaffen (Pyramide bilden und Diagonale absichern). Ballführenden Spieler unter Druck setzen. Duell suchen, Schuss und Flanke blockieren. Duell 1:1 in der Box gewinnen.
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 2 – Gegenangriff bremsen:</strong> Ballführenden Spieler sofort unter Druck setzen, Nähe zum Gegenspieler suchen und vertikalen Pass verhindern (Tiefe absichern). So schnell wie möglich Überzahl in Ballnähe schaffen (Pyramide bilden). Wenn nicht möglich: Fallen lassen, sich organisieren, mit dem Ziel, den Ball zu erobern.
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 3 – Gegenpressing:</strong> Nach vorne verteidigen. Ballführenden Spieler sofort unter Druck setzen. Prinzip der 3 Kreise. Wenn nicht möglich: Fallen lassen, sich organisieren, mit dem Ziel, den Ball zu erobern.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PHASE C: Wir erobern den Ball -->
-        <div class="card" style="border-left: 4px solid #10b981; padding: 12px; background: rgba(16, 185, 129, 0.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-          <div onclick="toggleKompassPhase('ball-gewinn')" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-            <h4 style="font-size: 11.5px; font-weight: 900; color: #10b981;">🟢 Wir erobern den Ball: Umschalten DEF – OFF</h4>
-            <svg id="kompass-chevron-ball-gewinn" style="width:16px; height:16px; stroke:#10b981; fill:none; transition: transform 0.2s;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div id="kompass-content-ball-gewinn" style="display: none; margin-top: 10px; font-size: 10px; line-height: 1.5; color: var(--text-main);">
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #10b981;">Ziele:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Initiative behalten, weiterhin agieren.</li>
-                <li>Spielsituation rasch erkennen und blitzschnell entscheiden.</li>
-                <li>Verfügbaren Raum und Zeit nutzen, um Tore zu erzielen.</li>
-              </ul>
-            </div>
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #10b981;">Prinzipien:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Ballgewinnzone verlassen mit der Priorität vorwärts.</li>
-                <li>Sofort situative Lösungen anbieten.</li>
-                <li>Vom Ungleichgewicht des Gegners in seiner Organisation profitieren: direkten Weg zum Tor suchen (freie Räume attackieren mit und ohne Ball) oder wenn nicht möglich: Ballsicherung, um einen neuen Angriff vorzubereiten.</li>
-              </ul>
-            </div>
-            <div>
-              <strong style="color: #10b981;">Umsetzung nach Zonen:</strong>
-              <div style="margin-top: 4px; padding-left: 6px; border-left: 2px solid rgba(16, 185, 129, 0.3);">
-                <strong>Zone 1 – Nach vorne spielen:</strong> Tiefe nutzen: Direkt oder nach dem zweiten oder dritten Pass (Freilaufbewegungen). Die Zone 2 oder 3 mit «Zielspielern» suchen. Gezielter langer Ball in den Raum (in den Rücken der gegnerischen Defensive). Wenn nicht möglich: Ballsicherung (Spielrhythmus kontrollieren) mit dem Ziel Neuaufbau.
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 2 – In die Zone 3 spielen:</strong> «Zielspieler» in der Zone 3 finden. Schnittstellenpass aus der Zone 2 in die Zone 3 oder gezielter langer Ball in den Rücken der gegnerischen Defensive. Individuelle Aktion: Einzeldurchbruch mit oder ohne Ball durch die gegnerische Abwehr. Wenn nicht möglich: Ballsicherung (Spielrhythmus kontrollieren) mit dem Ziel Neuaufbau.
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 3/BOX – Tor erzielen:</strong> Gegner fixieren, 1:1 suchen und gewinnen. Dosierter, präziser 1. Pass. Pässe und Laufwege aufeinander abstimmen. Raschmöglichst, mit Entschlossenheit und Qualität abschliessen und das Tor erzielen. Wenn nicht möglich: Ballsicherung mit dem Ziel, eine neue Spielsituation zu schaffen.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PHASE D: Wir haben den Ball nicht -->
-        <div class="card" style="border-left: 4px solid #3b82f6; padding: 12px; background: rgba(59, 130, 246, 0.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-          <div onclick="toggleKompassPhase('kein-ball')" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer;">
-            <h4 style="font-size: 11.5px; font-weight: 900; color: #3b82f6;">🔵 Wir haben den Ball nicht: Ball erobern – Tor verhindern</h4>
-            <svg id="kompass-chevron-kein-ball" style="width:16px; height:16px; stroke:#3b82f6; fill:none; transition: transform 0.2s;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div id="kompass-content-kein-ball" style="display: none; margin-top: 10px; font-size: 10px; line-height: 1.5; color: var(--text-main);">
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #3b82f6;">Ziele:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Initiativ sein, agieren.</li>
-                <li>Ball zurückerobern und Tor verhindern.</li>
-                <li>Spiel des Gegners stören und ihn zu Fehlern zwingen (Raum und Zeit).</li>
-              </ul>
-            </div>
-            <div style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px;">
-              <strong style="color: #3b82f6;">Prinzipien:</strong>
-              <ul style="padding-left: 14px; margin-top: 2px;">
-                <li>Kompaktes Verteidigen: Alle 11 Spieler beteiligen sich am Defensivspiel (optimale Positionierung).</li>
-                <li>Prinzip der 3 Kreise: Kreis 1 (Ball jagen), Kreis 2 (Nähe zum Gegenspieler &amp; vertikale Pässe verhindern), Kreis 3 (Tiefe antizipieren &amp; absichern).</li>
-                <li>Den direkten Weg zum Tor kontrollieren.</li>
-                <li>Das Duell suchen und gewinnen.</li>
-                <li>Die Passlinien schliessen und Fehler des Gegners provozieren.</li>
-                <li>Mögliche Anspielstationen («Zielspieler») für das Umschalten DEF – OFF behalten.</li>
-              </ul>
-            </div>
-            <div>
-              <strong style="color: #3b82f6;">Umsetzung nach Zonen:</strong>
-              <div style="margin-top: 4px; padding-left: 6px; border-left: 2px solid rgba(59, 130, 246, 0.3);">
-                <strong>Zone 1/BOX – Tief verteidigen:</strong> Ballführenden Spieler permanent unter Druck setzen, Überzahl in Ballnähe schaffen. Steuern: Von der Gefahr weg (nach aussen). Tiefe absichern (Pyramide oder Diagonale). Flanken und Torschüsse blocken. In der Box: Situativ zwischen Mann- oder Raumdeckung entscheiden (Duell 1:1 in der Box gewinnen).
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 2 – Gegner kontrollieren:</strong> Ballführenden Spieler permanent unter Druck setzen (Mittelfeldpressing). Prinzip der 3 Kreise. Wenn der Druck auf den ballführenden Spieler nicht (mehr) möglich ist, fallen lassen und Gegner möglichst schnell wieder unter Druck setzen. Steuern: a) Zur Überzahl (zur Mitte) b) Von der Gefahr weg (nach aussen).
-                <br/><strong style="margin-top: 4px; display:inline-block;">Zone 3 – Hoch verteidigen:</strong> Angriffspressing. Nach vorne verteidigen: Bei Quer-/Rückpass des Gegners. Prinzip der 3 Kreise. Ballführenden Spieler permanent unter Druck setzen, falls nicht möglich: Fallen lassen (hoch – Mitte – tief). Den Angriff des Gegners in eine «günstige Position» steuern (nach aussen/zur Mitte).
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- 📋 MOBILER TRAININGS- & NOTIZENPLANER -->
-      <div class="card" style="border-left: 4px solid var(--primary); box-shadow: 0 4px 15px rgba(0,0,0,0.25);">
-        <h3 class="card-title" style="color: var(--primary); font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-          <svg style="width:16px;height:16px;stroke:var(--primary);fill:none;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Mobiler Trainings- &amp; Notizen-Planer
-        </h3>
-        <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">
-          Plane deine Trainingseinheiten mobil und offline. Die Übungen und Schwerpunkte werden sicher in IndexedDB abgelegt.
-        </p>
-
-        <form id="training-planner-form" onsubmit="saveTrainingPlan(event)">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-            <div class="form-group">
-              <label class="lbl">Trainingsdatum</label>
-              <input type="date" id="tp-date" class="inp" style="font-size:11px; padding:6px 10px;" required/>
-            </div>
-            <div class="form-group">
-              <label class="lbl">Trainingsschwerpunkt</label>
-              <select id="tp-focus" class="inp" style="font-size:11px; padding:6px 10px;">
-                <option value="ball-besitz">🟠 Wir haben den Ball (Spiel gestalten)</option>
-                <option value="ball-verlust">🔴 Wir verlieren den Ball (Umschalten OFF-DEF)</option>
-                <option value="kein-ball">🔵 Wir haben den Ball nicht (Tor verhindern)</option>
-                <option value="ball-gewinn">🟢 Wir erobern den Ball (Umschalten DEF-OFF)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label class="lbl">1. Aufwärmen &amp; Einstieg (15-20 Min.)</label>
-            <textarea id="tp-drill1" class="inp" style="min-height: 55px; font-size:11px; padding:6px 10px; line-height: 1.45;" placeholder="z.B. Laufkoordination, Pass-Dreiecke, Ballkontrolle..."></textarea>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label class="lbl">2. Hauptteil (Spielform / Taktik) (30-40 Min.)</label>
-            <textarea id="tp-drill2" class="inp" style="min-height: 55px; font-size:11px; padding:6px 10px; line-height: 1.45;" placeholder="z.B. 3v2 Zonen-Umschalten, Pressing-Kreise, 1v1 Duelle..."></textarea>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 8px;">
-            <label class="lbl">3. Schlussteil / freies Spiel (20-30 Min.)</label>
-            <textarea id="tp-drill3" class="inp" style="min-height: 55px; font-size:11px; padding:6px 10px; line-height: 1.45;" placeholder="z.B. 7v7 auf Tore, freies Spiel mit Überzahlregeln..."></textarea>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 12px;">
-            <label class="lbl">Wichtige Coaching-Stichpunkte (Didaktik / TIPS)</label>
-            <textarea id="tp-notes" class="inp" style="min-height: 55px; font-size:11px; padding:6px 10px; line-height: 1.45;" placeholder="z.B. Vororientierung (Schulterblick), Entschlossenheit in der Box!"></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-weight: 900; font-size:11px;">
-            TRAININGSPLAN OFFLINE SPEICHERN 💾
-          </button>
-        </form>
-      </div>
-    </section>
-
     <!-- 💾 BEREICH: ZENTRALE (Backup & JSON File Management) -->
     <section id="section-dateien" class="app-section">
       <div class="card" style="border-left: 3px solid var(--accent-green);">
@@ -1427,51 +1211,8 @@ select.inp option {
 
         <!-- SUB-TAB 2: TAKTIK-TRAINING -->
         <div id="academy-tab-content-taktik" class="academy-tab-content" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
-            <p style="font-size: 10.5px; color: var(--text-muted); line-height: 1.5; flex: 1;">
-              Übe hier die Spielzüge und Laufwege eures Teams! Ziehe die Spieler per Drag &amp; Drop und zeichne mit dem Buntstift Laufwege oder Passlinien direkt auf das virtuelle Spielfeld.
-            </p>
-            <button onclick="toggleAcademyPhilosophyView()" class="btn btn-secondary" style="padding: 5px 8px; font-size: 9px; font-weight: 800; border-color: rgba(59, 130, 246, 0.4); color: var(--accent-blue); display: flex; align-items: center; gap: 4px; white-space: nowrap; flex-shrink: 0;">
-              SPIELPHILOSOPHIE 🧭
-            </button>
-          </div>
-
-          <!-- AUSBILDUNGSPHILOSOPHIE BOX FÜR KINDER -->
-          <div id="academy-philosophy-box" class="card" style="display: none; background: #0f172a; border: 1px solid rgba(59, 130, 246, 0.25); margin-bottom: 12px; padding: 12px; animation: fadeIn 0.2s;">
-            <h4 style="font-size: 11px; font-weight: 900; color: var(--accent-blue); margin-bottom: 8px;">🧭 Didaktischer Spielkompass</h4>
-            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 9.5px; line-height: 1.45;">
-              <div style="background: rgba(255,255,255,0.02); padding: 6px; border-radius: 4px; border-left: 2px solid #f59e0b;">
-                <strong style="color: #f59e0b;">🟠 Wir haben den Ball (Gestalten &amp; Tore erzielen)</strong>
-                <div style="color: var(--text-muted); margin-top: 2px;">
-                  <strong>Breite nutzen:</strong> Zone 1 breit machen, präzise Pässe (kurz, lang, diagonal). ZM &amp; IV einbinden.
-                  <br/><strong>Zone 2 bestimmen:</strong> Dribbling, 1:1, Dreiecke bilden, Gegner fixieren, Diagonalpass.
-                  <br/><strong>Zone 3 abschliessen:</strong> Doppelpass, Hinterlaufen, Sprints in die Box, entschlossener Abschluss!
-                </div>
-              </div>
-              <div style="background: rgba(255,255,255,0.02); padding: 6px; border-radius: 4px; border-left: 2px solid #ef4444;">
-                <strong style="color: #ef4444;">🔴 Wir verlieren den Ball (Umschalten OFF-DEF)</strong>
-                <div style="color: var(--text-muted); margin-top: 2px;">
-                  <strong>Gegenpressing (Zone 3):</strong> Sofort Ballführenden pressen, 1. oder 2. Pass blockieren (3 Kreise).
-                  <br/><strong>Gegenangriff bremsen (Zone 2):</strong> Vertikalpass verhindern, Pyramide bilden. Falls nicht möglich: Fallen lassen!
-                  <br/><strong>Tor verteidigen (Zone 1):</strong> Überzahl in Box schaffen, Torschüsse blocken, 1:1 am Mann gewinnen.
-                </div>
-              </div>
-              <div style="background: rgba(255,255,255,0.02); padding: 6px; border-radius: 4px; border-left: 2px solid #10b981;">
-                <strong style="color: #10b981;">🟢 Wir erobern den Ball (Umschalten DEF-OFF)</strong>
-                <div style="color: var(--text-muted); margin-top: 2px;">
-                  <strong>Zone 1:</strong> Schnell tief spielen oder gezielter langer Ball in den Rücken der Defensive.
-                  <br/><strong>Zone 2:</strong> Schnittstellenpass aus Zone 2 in Zone 3 spielen. Einzeldurchbruch mit/ohne Ball.
-                  <br/><strong>Zone 3/BOX:</strong> Gegner fixieren, 1:1 gewinnen, mit Entschlossenheit &amp; Qualität abschliessen!
-                </div>
-              </div>
-              <div style="background: rgba(255,255,255,0.02); padding: 6px; border-radius: 4px; border-left: 2px solid #3b82f6;">
-                <strong style="color: #3b82f6;">🔵 Wir haben den Ball nicht (Erobern &amp; Tor verhindern)</strong>
-                <div style="color: var(--text-muted); margin-top: 2px;">
-                  <strong>Defensiv-Prinzip:</strong> Kompakte Positionierung (alle 11 Spieler) &amp; **Prinzip der 3 Kreise**!
-                  <br/><strong>Kreis 1:</strong> Ball jagen · <strong>Kreis 2:</strong> Nähe zum Gegenspieler &amp; Passwege schliessen · <strong>Kreis 3:</strong> Tiefe absichern.
-                </div>
-              </div>
-            </div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
+            Übe hier die Spielzüge und Laufwege eures Teams! Ziehe die Spieler per Drag & Drop und zeichne mit dem Buntstift Laufwege oder Passlinien direkt auf das virtuelle Spielfeld.
           </div>
 
           <div class="academy-card-cyber" style="padding: 10px;">
@@ -1579,10 +1320,6 @@ select.inp option {
     <button id="nav-bewertungen" class="nav-item" onclick="switchTab('bewertungen')">
       <svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       Bewertung
-    </button>
-    <button id="nav-spielkompass" class="nav-item" onclick="switchTab('spielkompass')">
-      <svg viewBox="0 0 24 24" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M16.2 7.8l-2 5.6-5.6 2 2-5.6 5.6-2z"/></svg>
-      Kompass
     </button>
     <button id="nav-dateien" class="nav-item" onclick="switchTab('dateien')">
       <svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
@@ -1808,11 +1545,6 @@ select.inp option {
       // Sync player selector when opening rating tab
       if (tabId === 'bewertungen') {
         populateRateSelector();
-      }
-      
-      // Lade Trainingsplan beim Öffnen des Spielkompasses
-      if (tabId === 'spielkompass') {
-        loadTrainingPlanIntoForm();
       }
     }
 
@@ -3990,81 +3722,12 @@ select.inp option {
       reader.readAsText(file);
     }
 
-    // 🧭 SPIELKOMPASS & TRAININGSPLANER OFFLINE ENGINE BY DOGUS KAPLAN
-    function toggleAcademyPhilosophyView() {
-      const box = document.getElementById('academy-philosophy-box');
-      if (!box) return;
-      box.style.display = box.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function toggleKompassPhase(phaseId) {
-      const content = document.getElementById(`kompass-content-${phaseId}`);
-      const chevron = document.getElementById(`kompass-chevron-${phaseId}`);
-      if (!content || !chevron) return;
-      
-      const isVisible = content.style.display === 'block';
-      
-      // Erst alle zuklappen (Akkordeon-Effekt)
-      const phases = ['ball-besitz', 'ball-verlust', 'ball-gewinn', 'kein-ball'];
-      phases.forEach(p => {
-        const c = document.getElementById(`kompass-content-${p}`);
-        const ch = document.getElementById(`kompass-chevron-${p}`);
-        if (c) c.style.display = 'none';
-        if (ch) ch.style.transform = 'rotate(0deg)';
-      });
-      
-      if (!isVisible) {
-        content.style.display = 'block';
-        chevron.style.transform = 'rotate(180deg)';
-      }
-    }
-
-    function saveTrainingPlan(e) {
-      e.preventDefault();
-      
-      const date = document.getElementById('tp-date').value;
-      const focus = document.getElementById('tp-focus').value;
-      const drill1 = document.getElementById('tp-drill1').value.trim();
-      const drill2 = document.getElementById('tp-drill2').value.trim();
-      const drill3 = document.getElementById('tp-drill3').value.trim();
-      const notes = document.getElementById('tp-notes').value.trim();
-      
-      APP_STATE.trainingPlan = {
-        date: date,
-        focus: focus,
-        drill1: drill1,
-        drill2: drill2,
-        drill3: drill3,
-        notes: notes
-      };
-      
-      saveStateToLocalStorageBackup(); // Sichert offline in DB & localStorage
-      showToast('✓ Trainingsplan offline gespeichert! 💾');
-    }
-
-    function loadTrainingPlanIntoForm() {
-      if (!APP_STATE.trainingPlan) {
-        // Standarddatum auf heute setzen
-        document.getElementById('tp-date').value = new Date().toISOString().split('T')[0];
-        return;
-      }
-      
-      const tp = APP_STATE.trainingPlan;
-      document.getElementById('tp-date').value = tp.date || new Date().toISOString().split('T')[0];
-      document.getElementById('tp-focus').value = tp.focus || 'ball-besitz';
-      document.getElementById('tp-drill1').value = tp.drill1 || '';
-      document.getElementById('tp-drill2').value = tp.drill2 || '';
-      document.getElementById('tp-drill3').value = tp.drill3 || '';
-      document.getElementById('tp-notes').value = tp.notes || '';
-    }
-
     // 🚀 INITIALISIERUNG BEIM START
     window.addEventListener('DOMContentLoaded', async () => {
       await loadStateFromLocalStorageBackup();
       renderDashboardStats();
       renderKaderList();
       populateRateSelector();
-      loadTrainingPlanIntoForm();
     });
   </script>
 </body>
