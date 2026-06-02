@@ -2955,6 +2955,20 @@ select.inp option {
       doc.save('TIPSU_Quartals_Ranking.pdf');
       showToast('✓ Ranking-PDF generiert');
     }
+    // Tagesauswertung: pro Spieler Tapper-Aktionen + Turnier-Punkte zusammenrechnen
+    function tkAggregateDay(key){
+      const map = {};
+      const ensure = (name) => { const n = name || 'Unbenannt'; if (!map[n]) map[n] = { name: n, taps: 0, pts: 0 }; return map[n]; };
+      APP_STATE.tapperArchive.filter(r => dayKey(r.date) === key).forEach(r => {
+        (r.results || []).forEach(x => { ensure(x.name).taps += (x.count || 0); });
+      });
+      APP_STATE.sessionArchive.filter(s => dayKey(s.date) === key).forEach(s => {
+        (s.teams || []).forEach(t => { (t.players || []).forEach(nm => { ensure(nm).pts += (t.points || 0); }); });
+      });
+      return Object.keys(map).map(k => { const e = map[k]; e.total = e.taps + e.pts; return e; })
+        .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
+    }
+
     function exportArchivePDF(){
       const days = archiveDays();
       if (!days.length){ showToast('Kein Verlauf vorhanden.', true); return; }
@@ -3010,6 +3024,42 @@ select.inp option {
           y = doc.lastAutoTable.finalY + 4;
         });
       }
+
+      // ── TRAININGSMEISTER: Tageswertung mit Gesamtpunkt-Summe ──
+      const agg = tkAggregateDay(key);
+      if (agg.length){
+        if (y > doc.internal.pageSize.getHeight() - 60){ doc.addPage(); y = 24; }
+        doc.setFont('Helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0, 0, 0);
+        doc.text('TRAININGSMEISTER – TAGESWERTUNG', 14, y);
+        const sumTaps = agg.reduce((a, e) => a + e.taps, 0);
+        const sumPts = agg.reduce((a, e) => a + e.pts, 0);
+        const sumTotal = agg.reduce((a, e) => a + e.total, 0);
+        doc.autoTable({
+          startY: y + 3,
+          head: [['Platz', 'Spieler', 'Tapper-Aktionen', 'Turnier-Punkte', 'Gesamtpunkte']],
+          body: agg.map((e, i) => [
+            String(i + 1),
+            e.name + (i === 0 ? '  (Trainingsmeister)' : ''),
+            String(e.taps), String(e.pts), String(e.total)
+          ]),
+          foot: [['', 'GESAMT (alle Spieler)', String(sumTaps), String(sumPts), String(sumTotal)]],
+          theme: 'grid',
+          headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9 },
+          footStyles: { fillColor: [225, 225, 225], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: 9 },
+          bodyStyles: { textColor: [0, 0, 0] },
+          styles: { font: 'Helvetica', fontSize: 9, cellPadding: 2.2 },
+          columnStyles: { 0: { halign: 'center', cellWidth: 16 }, 2: { halign: 'center', cellWidth: 32 }, 3: { halign: 'center', cellWidth: 30 }, 4: { halign: 'center', cellWidth: 28, fontStyle: 'bold' } },
+          margin: { left: 14, right: 14 },
+          didParseCell: function(data){
+            if (data.section === 'body' && data.row.index === 0){
+              data.cell.styles.fillColor = [246, 236, 210];
+              data.cell.styles.fontStyle = 'bold';
+            }
+          }
+        });
+        y = doc.lastAutoTable.finalY + 4;
+      }
+
       tkPdfFooter(doc);
       doc.save('TIPSU_Verlauf_' + key + '.pdf');
       showToast('✓ Verlauf-PDF generiert');
