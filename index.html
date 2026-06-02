@@ -17,13 +17,13 @@
   --card-border: rgba(255, 255, 255, 0.06);
   --text-main: #f1f5f9;
   --text-muted: #64748b;
-  
+
   --primary: #e27d38;
   --primary-glow: rgba(226, 125, 56, 0.25);
   --accent-blue: #4f46e5;
   --accent-green: #059669;
   --accent-red: #dc2626;
-  
+
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -221,7 +221,7 @@ html {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  width: 20%;
+  flex: 1;
   height: 100%;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -389,6 +389,11 @@ select.inp option {
   color: var(--accent-red);
 }
 
+.btn-accent {
+  background: linear-gradient(135deg, var(--primary), #c25e1f);
+  color: white;
+}
+
 /* ⚽ LISTS & DETAIL VIEWS */
 .list-item {
   display: flex;
@@ -483,6 +488,11 @@ select.inp option {
   transform: translateX(-50%) translateY(0);
 }
 
+#toast.err {
+  border-color: var(--accent-red);
+  background: #2a1414;
+}
+
 /* ════════════════════════════════════════════════════════════════
    🎮 ACADEMY STYLES (Cyber-Sport Mode by Dogus Kaplan)
    ════════════════════════════════════════════════════════════════ */
@@ -507,45 +517,6 @@ select.inp option {
 .toggle-mode-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 0 12px var(--primary-glow);
-}
-.toggle-mode-btn.player-mode {
-  background: linear-gradient(135deg, var(--accent-blue), #38bdf8);
-  color: #ffffff;
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
-}
-.toggle-mode-btn.player-mode:hover {
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
-}
-
-.academy-container {
-  display: none;
-  flex-direction: column;
-  animation: fadeIn 0.3s ease forwards;
-}
-
-.academy-container.active {
-  display: flex;
-}
-
-.academy-card-cyber {
-  background: #111827;
-  border: 1px solid rgba(59, 130, 246, 0.15);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  position: relative;
-  overflow: hidden;
-}
-
-.academy-card-cyber::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-blue), var(--primary));
 }
 
 .academy-sub-nav {
@@ -574,127 +545,9 @@ select.inp option {
 }
 
 .academy-sub-nav-btn.active {
-  color: var(--accent-blue);
-  background: rgba(59, 130, 246, 0.08);
-  box-shadow: inset 0 -2px 0 var(--accent-blue);
-}
-
-/* Trophäen Glimmen */
-.trophy-badge {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 8px;
-  text-align: center;
-  transition: all 0.2s;
-}
-
-.trophy-badge:hover {
-  transform: translateY(-2px);
-}
-
-.trophy-badge.gold {
-  border-color: rgba(245, 158, 11, 0.3);
-  background: rgba(245, 158, 11, 0.05);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.1);
-}
-
-.trophy-badge.silver {
-  border-color: rgba(148, 163, 184, 0.3);
-  background: rgba(148, 163, 184, 0.05);
-  box-shadow: 0 0 10px rgba(148, 163, 184, 0.1);
-}
-
-.trophy-badge.bronze {
-  border-color: rgba(180, 83, 9, 0.3);
-  background: rgba(180, 83, 9, 0.05);
-  box-shadow: 0 0 10px rgba(180, 83, 9, 0.1);
-}
-
-.trophy-icon {
-  font-size: 22px;
-  margin-bottom: 4px;
-}
-
-/* Taktikboard Canvas */
-.taktik-canvas-container {
-  position: relative;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--card-border);
-  background: #1e3a1f; /* Dunkleres Feld für besseren Kontrast */
-}
-
-/* Modul-Liste */
-.module-item-cyber {
-  background: rgba(17, 24, 39, 0.6);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.module-item-cyber:hover:not(.locked) {
-  background: rgba(59, 130, 246, 0.05);
-  border-color: rgba(59, 130, 246, 0.3);
-  transform: translateX(2px);
-}
-
-.module-item-cyber.locked {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.module-item-cyber.passed {
-  border-color: rgba(16, 185, 129, 0.3);
-  background: rgba(16, 185, 129, 0.03);
-}
-
-/* Quiz Options */
-.quiz-option-btn {
-  width: 100%;
-  text-align: left;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--card-border);
-  color: var(--text-main);
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  margin-bottom: 8px;
-  line-height: 1.4;
-  font-family: inherit;
-}
-
-.quiz-option-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--text-muted);
-}
-
-.quiz-option-btn.correct {
-  background: rgba(16, 185, 129, 0.15) !important;
-  border-color: var(--accent-green) !important;
-  color: #34d399 !important;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
-}
-
-.quiz-option-btn.wrong {
-  background: rgba(239, 68, 68, 0.15) !important;
-  border-color: var(--accent-red) !important;
-  color: #f87171 !important;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+  color: var(--primary);
+  background: rgba(226, 125, 56, 0.08);
+  box-shadow: inset 0 -2px 0 var(--primary);
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -705,7 +558,6 @@ select.inp option {
   border-left: 4px solid var(--primary);
 }
 
-/* Interaktiver Spielkompass */
 .kompass-wrap {
   display: flex;
   justify-content: center;
@@ -733,7 +585,6 @@ select.inp option {
   pointer-events: none;
 }
 
-/* Phasen-Filterleiste */
 .phase-filter {
   display: flex;
   gap: 6px;
@@ -768,7 +619,6 @@ select.inp option {
   color: var(--text-main);
 }
 
-/* Phasen-Block */
 .phase-block { margin-bottom: 14px; }
 .phase-block.hidden { display: none; }
 .phase-head {
@@ -788,7 +638,6 @@ select.inp option {
   text-transform: uppercase; letter-spacing: 0.05em;
 }
 
-/* Ziele-Box */
 .ziele-box {
   background: rgba(255,255,255,0.03);
   border: 1px solid var(--card-border);
@@ -835,7 +684,6 @@ select.inp option {
   text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
 }
 
-/* Aufklappbare Zonen (native details/summary) */
 .zone-acc {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -877,6 +725,170 @@ select.inp option {
   border-top: 1px solid var(--card-border);
   padding-top: 12px;
 }
+
+/* ════════════════════════════════════════════════════════════════
+   🏆 WETTKAMPF (Turnier · Ranking · Tapper · Archiv) – integriert
+   Eigene tk-Klassen, damit das Originalsystem 100% unberührt bleibt.
+   ════════════════════════════════════════════════════════════════ */
+.wk-sub { display: none; }
+.wk-sub.active { display: block; animation: fadeIn 0.2s ease forwards; }
+
+.tk-empty {
+  text-align: center; color: var(--text-muted);
+  padding: 28px 12px; font-size: 12px; line-height: 1.6;
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed var(--card-border); border-radius: 12px;
+}
+.tk-empty .big { font-size: 30px; display: block; margin-bottom: 8px; }
+
+.tk-btn {
+  width: 100%; min-height: 54px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: inherit; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em;
+  font-size: 13px; background: rgba(255,255,255,0.05);
+  border: 1px solid var(--card-border); color: var(--text-main);
+  cursor: pointer; transition: transform .06s, filter .15s; margin-bottom: 12px;
+}
+.tk-btn:active { transform: scale(.985); filter: brightness(1.15); }
+.tk-btn--accent { background: linear-gradient(135deg, var(--primary), #c25e1f); color:#fff; border-color: var(--primary); }
+.tk-btn--ghost { background: transparent; }
+.tk-btn--danger { color: var(--accent-red); border-color: rgba(239,68,68,0.4); }
+.tk-btn--warn { color: #f59e0b; border-color: rgba(245,158,11,0.4); }
+.tk-btn:disabled { opacity:.4; filter: grayscale(.6); cursor:not-allowed; }
+.tk-btn-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+/* Team-Karten */
+.tk-team-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-left: 5px solid var(--tc, var(--primary));
+  border-radius: 14px; padding: 14px; margin-bottom: 12px;
+}
+.tk-team-top { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.tk-team-name {
+  font-size: 18px; font-weight: 900; letter-spacing: .3px;
+  color: var(--tc, var(--text-main)); flex:1; text-transform: uppercase; line-height:1.1;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.tk-team-players { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; min-height:4px; }
+.tk-chip {
+  display:inline-flex; align-items:center; gap:4px;
+  background: rgba(255,255,255,0.05); border:1px solid var(--card-border);
+  border-radius: 999px; padding:5px 11px; font-size:11px; font-weight:700;
+}
+.tk-chip.add { border-style: dashed; color: var(--text-muted); background: transparent; cursor:pointer; }
+.tk-icon-btn {
+  width:38px; height:38px; border-radius:9px; background: rgba(255,255,255,0.04);
+  border:1px solid var(--card-border); display:grid; place-items:center;
+  font-size:16px; flex-shrink:0; cursor:pointer; color: var(--text-main);
+}
+.tk-icon-btn.danger { color: var(--accent-red); }
+.tk-score-row { display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:stretch; }
+.tk-score-btn {
+  min-height:74px; border-radius:12px; font-size:34px; font-weight:900;
+  display:grid; place-items:center; border:2px solid; cursor:pointer; font-family:inherit;
+}
+.tk-score-btn.minus { color: var(--accent-red); border-color: var(--accent-red); background: rgba(220,38,38,.08); }
+.tk-score-btn.plus  { color: var(--accent-green); border-color: var(--accent-green); background: rgba(5,150,105,.10); }
+.tk-score-btn:active { filter:brightness(1.4); transform:scale(.96); }
+.tk-score-val {
+  min-width:84px; display:grid; place-items:center;
+  font-weight:900; font-size:40px; line-height:1; color: var(--text-main);
+}
+
+/* Ranking */
+.tk-rank-row {
+  display:flex; align-items:center; gap:14px;
+  background: rgba(255,255,255,0.02); border:1px solid var(--card-border);
+  border-radius:12px; padding:13px 14px; margin-bottom:10px;
+}
+.tk-rank-pos { font-size:22px; font-weight:900; width:42px; text-align:center; color: var(--text-muted); }
+.tk-rank-row.r1 { border-color:#ffc83a; } .tk-rank-row.r1 .tk-rank-pos { color:#ffc83a; }
+.tk-rank-row.r2 .tk-rank-pos { color:#c9d2dc; }
+.tk-rank-row.r3 .tk-rank-pos { color:#e08b4c; }
+.tk-rank-name { flex:1; font-weight:700; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.tk-rank-pts { font-size:22px; font-weight:900; color: var(--primary); }
+
+/* Tapper */
+.tk-timer-card {
+  background: var(--card-bg); border:1px solid var(--card-border);
+  border-radius:16px; padding:16px; margin-bottom:12px; text-align:center;
+}
+.tk-timer-display { font-size:58px; font-weight:900; line-height:1; letter-spacing:2px; }
+.tk-timer-display.run { color: var(--primary); }
+.tk-timer-display.paused { color:#f59e0b; }
+.tk-timer-display.done { color:#ffc83a; }
+.tk-minutes-set { display:flex; align-items:center; justify-content:center; gap:16px; margin:8px 0 14px; }
+.tk-step-btn {
+  width:62px; height:62px; border-radius:50%; border:2px solid var(--card-border);
+  background: rgba(255,255,255,0.04); font-size:26px; font-weight:900;
+  display:grid; place-items:center; cursor:pointer; color: var(--text-main); font-family:inherit;
+}
+.tk-step-btn:active { background: rgba(255,255,255,0.08); }
+.tk-step-btn:disabled { opacity:.35; }
+.tk-minutes-val { min-width:110px; }
+.tk-minutes-val .n { font-size:34px; font-weight:900; line-height:1; }
+.tk-minutes-val .u { display:block; font-size:9px; color: var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+.tk-tap-grid { display:grid; gap:12px; }
+.tk-tap-card { border-radius:16px; overflow:hidden; border:1px solid var(--card-border); background: var(--card-bg); }
+.tk-tap-zone {
+  width:100%; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; background: rgba(255,255,255,0.02); border:none; cursor:pointer; color: var(--text-main); font-family:inherit;
+}
+.tk-tap-zone:enabled:active { background: rgba(255,255,255,0.06); filter:brightness(1.3); }
+.tk-tap-zone:disabled { opacity:.55; cursor:default; }
+.tk-tap-zone .pname { font-size:13px; font-weight:700; color: var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+.tk-tap-zone .pcount { font-size:46px; font-weight:900; line-height:1; color: var(--primary); }
+.tk-tap-card.result .tk-tap-zone { background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.06)); }
+.tk-tap-card.result .pcount { color:#ffc83a; }
+.tk-result-line { font-size:11px; color: var(--text-muted); padding:8px 12px; text-align:center; border-top:1px solid var(--card-border); }
+
+/* Archiv */
+.tk-day-nav { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.tk-day-nav .lbl { flex:1; text-align:center; font-size:15px; font-weight:900; text-transform:uppercase; letter-spacing:1px; line-height:1.2; }
+.tk-day-nav .lbl small { display:block; font-size:10px; color: var(--text-muted); letter-spacing:1px; font-weight:700; }
+.tk-day-nav button { width:50px; height:50px; border-radius:12px; background: rgba(255,255,255,0.04); border:1px solid var(--card-border); font-size:18px; display:grid; place-items:center; cursor:pointer; color: var(--text-main); }
+.tk-day-nav button:disabled { opacity:.3; }
+.tk-arch-title { font-size:13px; font-weight:900; text-transform:uppercase; letter-spacing:1px; color: var(--text-muted); margin:14px 2px 10px; display:flex; align-items:center; gap:8px; }
+.tk-arch-entry { background: rgba(255,255,255,0.02); border:1px solid var(--card-border); border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+.tk-arch-entry .meta { display:flex; justify-content:space-between; color: var(--text-muted); font-size:11px; margin-bottom:8px; font-weight:700; }
+.tk-arch-entry .meta .t { color: var(--primary); }
+.tk-arch-entry .body { display:flex; flex-wrap:wrap; gap:6px; }
+.tk-pill { background: rgba(255,255,255,0.05); border-radius:8px; padding:5px 10px; font-size:11px; font-weight:700; }
+.tk-pill b { color: var(--primary); }
+.tk-pill.team b { color: var(--tc, var(--primary)); }
+
+/* Bottom-Sheet (Picker) */
+.tk-sheet-overlay { position:fixed; inset:0; z-index:160; background: rgba(0,0,0,.6); display:flex; align-items:flex-end; justify-content:center; animation: fadeIn .15s; }
+.tk-sheet-overlay[hidden] { display:none; }
+.tk-sheet {
+  width:100%; max-width:560px; background: var(--card-bg); border:1px solid var(--card-border);
+  border-radius:22px 22px 0 0; max-height:82vh; display:flex; flex-direction:column;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tk-sheet-head { display:flex; align-items:center; gap:10px; padding:16px 16px 8px; }
+.tk-sheet-head h3 { font-size:15px; font-weight:900; text-transform:uppercase; letter-spacing:1px; flex:1; }
+.tk-sheet-body { padding:8px 16px 16px; overflow-y:auto; }
+.tk-club-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.tk-club-btn {
+  min-height:58px; border-radius:12px; border:2px solid var(--cc, var(--card-border));
+  background: rgba(255,255,255,0.03); display:flex; align-items:center; justify-content:center; gap:8px;
+  font-size:14px; font-weight:800; text-transform:uppercase; color: var(--cc, var(--text-main)); padding:0 10px; text-align:center; cursor:pointer; font-family:inherit;
+}
+.tk-club-btn:active { filter:brightness(1.3); }
+.tk-club-btn:disabled { opacity:.3; }
+.tk-field { display:flex; gap:10px; margin-bottom:14px; }
+.tk-field input[type=text] { flex:1; min-height:50px; background: rgba(255,255,255,0.04); border:1px solid var(--card-border); border-radius:12px; padding:0 16px; font-size:14px; color: var(--text-main); font-family:inherit; }
+.tk-field input::placeholder { color: var(--text-muted); }
+.tk-pick-row { display:flex; align-items:center; gap:12px; background: rgba(255,255,255,0.03); border:1px solid var(--card-border); border-radius:12px; padding:12px 14px; min-height:56px; margin-bottom:10px; cursor:pointer; }
+.tk-pick-row.sel { border-color: var(--primary); background: rgba(226,125,56,.08); }
+.tk-pick-row .name { flex:1; font-weight:700; }
+.tk-pick-row .mark { font-size:18px; color: var(--primary); width:22px; text-align:center; }
+
+/* Eigener Bestätigungsdialog */
+.tk-modal-overlay { position:fixed; inset:0; z-index:200; background: rgba(0,0,0,.66); display:flex; align-items:center; justify-content:center; padding:22px; animation: fadeIn .15s; }
+.tk-modal-overlay[hidden] { display:none; }
+.tk-modal { width:100%; max-width:380px; background: var(--card-bg); border:1px solid var(--card-border); border-radius:18px; padding:20px; }
+.tk-modal p { font-size:14px; line-height:1.5; margin-bottom:18px; white-space:pre-line; }
 </style>
 </head>
 <body>
@@ -951,7 +963,7 @@ select.inp option {
         <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;">
           Schnellzugriff auf Berichte und Backups. Drucke Berichte aus oder lade deine JSON-Dateien direkt hier hoch/runter.
         </p>
-        
+
         <!-- Quick Player PDF Selector -->
         <div style="margin-bottom: 12px;">
           <label class="lbl" style="color: var(--text-main);">Schnell-PDF-Druck für Spieler</label>
@@ -980,7 +992,7 @@ select.inp option {
           <svg style="width:16px;height:16px;stroke:var(--accent-blue);fill:none;" viewBox="0 0 24 24" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
           System-Anleitung &amp; Philosophie
         </h3>
-        
+
         <p style="font-size: 11px; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; font-weight: 500;">
           Dieses System läuft zu <strong>100% offline-sicher</strong> im Webbrowser deines Smartphones oder PCs. Es wurde von <strong>Dogus Kaplan (Schweiz)</strong> für die freie, öffentliche Offline-Nutzung für alle Trainer, Vereine und Sportler da draussen entwickelt. Keine Registrierung, keine Cloud, absoluter Schutz deiner Spielerdaten!
         </p>
@@ -990,12 +1002,12 @@ select.inp option {
             <span style="background: rgba(79, 70, 229, 0.2); color: #818cf8; padding: 2px 6px; border-radius: 4px; font-weight: 800; font-size: 9px; flex-shrink: 0; margin-top: 1px;">1</span>
             <div><strong>Kader erfassen:</strong> Lege deine Spieler im Reiter <em>Kader</em> an (Name, Nummer, starker Fuss, Geburtsdatum &amp; optional Verein/Team).</div>
           </div>
-          
+
           <div style="display: flex; gap: 8px; align-items: flex-start;">
             <span style="background: rgba(79, 70, 229, 0.2); color: #818cf8; padding: 2px 6px; border-radius: 4px; font-weight: 800; font-size: 9px; flex-shrink: 0; margin-top: 1px;">2</span>
             <div><strong>Entwicklung bewerten:</strong> Vergib Noten (1-4) im Reiter <em>Bewertung</em> und hake das detaillierte Kriterien-Verhalten (TIPS/U) in den aufklappbaren Akkordeons direkt ab.</div>
           </div>
-          
+
           <div style="display: flex; gap: 8px; align-items: flex-start;">
             <span style="background: rgba(226, 125, 56, 0.2); color: var(--primary); padding: 2px 6px; border-radius: 4px; font-weight: 800; font-size: 9px; flex-shrink: 0; margin-top: 1px;">3</span>
             <div><strong>Zustand sichern &amp; laden:</strong> Weil alles offline läuft, speichert der Browser deine Daten im lokalen Speicher. Für dauerhafte Sicherheit klicke auf <strong>Kader sichern</strong> und lade die JSON-Backup-Datei herunter. Über <strong>Kader laden</strong> kannst du deine Mannschaft jederzeit auf jedem Gerät wiederherstellen.</div>
@@ -1052,10 +1064,10 @@ select.inp option {
     <section id="section-kader" class="app-section">
       <div class="card">
         <h3 id="form-title" class="card-title">Neuen Spieler erfassen</h3>
-        
+
         <form id="player-form" onsubmit="handlePlayerSubmit(event)">
           <input type="hidden" id="edit-player-id" value=""/>
-          
+
           <div style="display: grid; grid-template-columns: 70px 1fr; gap: 8px;">
             <div class="form-group">
               <label class="lbl">Rückennr.</label>
@@ -1131,8 +1143,7 @@ select.inp option {
         </div>
 
         <div style="font-size: 9px; color: var(--text-muted); margin-bottom: 12px;">BEWERTUNGSSKALA: 1 = Schwach · 2 = Genügend · 3 = Gut · 4 = Sehr gut</div>
-        
-        <!-- TIPS/U Skalen -->
+
         <!-- Technik (T) -->
         <div class="score-row" style="border-bottom: none; padding-bottom: 4px;">
           <div>
@@ -1245,12 +1256,67 @@ select.inp option {
       </div>
     </section>
 
+    <!-- 🏆 BEREICH: WETTKAMPF (Turnier · Ranking · Tapper · Archiv) -->
+    <section id="section-wettkampf" class="app-section">
+      <div class="card lehre-intro">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+          <h2 style="font-size:18px; font-weight:900; margin:0;">Wettkampf-Zentrale</h2>
+          <span class="badge" style="background: rgba(224,123,57,0.1); color: var(--primary);">Live-Tools</span>
+        </div>
+        <p style="font-size:11px; color: var(--text-muted); line-height:1.5;">
+          Live-Turnierwertung, Quartals-Ranking, Action-Tapper und Tages-Archiv. Alle Tools greifen auf deinen gemeinsamen <strong>Kader</strong> zu – Spieler legst du wie gewohnt im Reiter «Kader» an.
+        </p>
+      </div>
+
+      <!-- Unter-Navigation -->
+      <div class="academy-sub-nav">
+        <button class="academy-sub-nav-btn active" data-wk="turnier" onclick="switchWettkampf('turnier')">🏆 Turnier</button>
+        <button class="academy-sub-nav-btn" data-wk="ranking" onclick="switchWettkampf('ranking')">📊 Ranking</button>
+        <button class="academy-sub-nav-btn" data-wk="tapper" onclick="switchWettkampf('tapper')">⚡ Tapper</button>
+        <button class="academy-sub-nav-btn" data-wk="archiv" onclick="switchWettkampf('archiv')">🗓️ Archiv</button>
+      </div>
+
+      <!-- UNTER-TAB: TURNIER -->
+      <div id="wk-turnier" class="wk-sub active">
+        <div id="tk-teamArea"></div>
+        <button class="tk-btn" id="tk-addTeamBtn">＋ Team hinzufügen</button>
+        <button class="tk-btn tk-btn--accent" id="tk-endSessionBtn">✓ Session beenden &amp; Punkte verteilen</button>
+      </div>
+
+      <!-- UNTER-TAB: RANKING -->
+      <div id="wk-ranking" class="wk-sub">
+        <div id="tk-rankArea"></div>
+        <button class="tk-btn tk-btn--accent" id="tk-rankPdfBtn">🖨️ Ranking als PDF drucken</button>
+        <button class="tk-btn tk-btn--ghost tk-btn--danger" id="tk-resetQuarterBtn">Quartal zurücksetzen</button>
+      </div>
+
+      <!-- UNTER-TAB: ACTION-TAPPER -->
+      <div id="wk-tapper" class="wk-sub">
+        <div class="tk-timer-card">
+          <div class="tk-timer-display" id="tk-timerDisplay">04:00</div>
+          <div class="tk-minutes-set">
+            <button class="tk-step-btn" id="tk-minMinus" aria-label="Minute weniger">−</button>
+            <div class="tk-minutes-val" style="text-align:center;"><span class="n" id="tk-minVal">4</span><span class="u">Minuten</span></div>
+            <button class="tk-step-btn" id="tk-minPlus" aria-label="Minute mehr">＋</button>
+          </div>
+          <div class="tk-btn-row" id="tk-tapControls"></div>
+        </div>
+        <div class="tk-tap-grid" id="tk-tapGrid"></div>
+      </div>
+
+      <!-- UNTER-TAB: ARCHIV -->
+      <div id="wk-archiv" class="wk-sub">
+        <div id="tk-archArea"></div>
+        <button class="tk-btn tk-btn--accent" id="tk-archPdfBtn">🖨️ Verlauf dieses Tages als PDF</button>
+      </div>
+    </section>
+
     <!-- 💾 BEREICH: ZENTRALE (Backup & JSON File Management) -->
     <section id="section-dateien" class="app-section">
       <div class="card" style="border-left: 3px solid var(--accent-green);">
         <h3 class="card-title">💾 Daten-Zentrale</h3>
         <p style="font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
-          Da diese Anwendung 100% offline ohne Internetverbindung läuft, werden die Daten nicht auf fremden Servern gespeichert. Sichere deinen Stand, indem du deine Kaderdatei herunterlädst.
+          Da diese Anwendung 100% offline ohne Internetverbindung läuft, werden die Daten nicht auf fremden Servern gespeichert. Sichere deinen Stand, indem du deine Kaderdatei herunterlädst. Das Backup enthält Kader, Bewertungen, Notizen <strong>sowie alle Turnier-, Ranking- und Tapper-Daten</strong>.
         </p>
       </div>
 
@@ -1258,11 +1324,11 @@ select.inp option {
       <div class="card">
         <h3 class="card-title" style="color: var(--primary);">📤 Kader sichern / Exportieren</h3>
         <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">
-          Lade den aktuellen Kader inklusive aller Bewertungen und Notizen als lokale JSON-Datei auf dein Smartphone oder deinen PC herunter.
+          Lade den aktuellen Stand inklusive aller Bewertungen, Notizen und Wettkampf-Daten als lokale JSON-Datei auf dein Smartphone oder deinen PC herunter.
         </p>
         <button onclick="exportKaderJSON()" class="btn btn-primary">
           <svg style="width:16px;height:16px;stroke:white;fill:none;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Kader-Datei herunterladen (.json)
+          Daten-Datei herunterladen (.json)
         </button>
       </div>
 
@@ -1270,7 +1336,7 @@ select.inp option {
       <div class="card">
         <h3 class="card-title" style="color: var(--accent-blue);">📥 Kader laden / Importieren</h3>
         <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">
-          Wähle eine zuvor gespeicherte `.json` Datei aus deinem lokalen Gerätespeicher aus, um deine Mannschaft und alle Entwicklungsdaten wiederherzustellen.
+          Wähle eine zuvor gespeicherte `.json` Datei aus deinem lokalen Gerätespeicher aus, um deine Mannschaft und alle Entwicklungs- &amp; Wettkampfdaten wiederherzustellen.
         </p>
         <div style="position: relative;">
           <input type="file" id="importFile" accept=".json" onchange="importKaderJSON(event)" style="display: none;" />
@@ -1280,12 +1346,12 @@ select.inp option {
           </button>
         </div>
       </div>
-      
+
       <!-- Reset/Clear DB -->
       <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.2); background: rgba(239, 68, 68, 0.02);">
         <h3 class="card-title" style="color: var(--accent-red);">⚠️ Lokale App zurücksetzen</h3>
         <p style="font-size: 11px; color: rgba(239, 68, 68, 0.7); margin-bottom: 12px;">
-          Hiermit löschst du alle erfassten Spieler und Notizen komplett aus der App. Stelle sicher, dass du zuvor ein Backup exportiert hast.
+          Hiermit löschst du alle erfassten Spieler, Notizen und Wettkampfdaten komplett aus der App. Stelle sicher, dass du zuvor ein Backup exportiert hast.
         </p>
         <button onclick="resetWholeApp()" class="btn btn-danger" style="width: 100%;">
           Kaderdaten unwiderruflich löschen
@@ -1320,20 +1386,14 @@ select.inp option {
         <div class="card-title">🧭 Der Spielkompass</div>
         <div class="kompass-wrap">
           <svg class="kompass-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
-            <!-- TL: Wir haben den Ball (grün) -->
             <path class="kompass-quad" data-phase="haben" onclick="filterLehre('haben')"
               d="M110,110 L15,110 A95,95 0 0 1 110,15 Z" fill="#059669" stroke="#080d16" stroke-width="2"/>
-            <!-- TR: Wir verlieren den Ball (amber) -->
             <path class="kompass-quad" data-phase="verlieren" onclick="filterLehre('verlieren')"
               d="M110,110 L110,15 A95,95 0 0 1 205,110 Z" fill="#d97706" stroke="#080d16" stroke-width="2"/>
-            <!-- BR: Wir haben den Ball nicht (rot) -->
             <path class="kompass-quad" data-phase="habennicht" onclick="filterLehre('habennicht')"
               d="M110,110 L205,110 A95,95 0 0 1 110,205 Z" fill="#dc2626" stroke="#080d16" stroke-width="2"/>
-            <!-- BL: Wir erobern den Ball (orange) -->
             <path class="kompass-quad" data-phase="erobern" onclick="filterLehre('erobern')"
               d="M110,110 L110,205 A95,95 0 0 1 15,110 Z" fill="#ea580c" stroke="#080d16" stroke-width="2"/>
-
-            <!-- Quadranten-Labels -->
             <text class="kompass-label" x="68" y="62" text-anchor="middle">BALL</text>
             <text class="kompass-label" x="68" y="74" text-anchor="middle">HABEN</text>
             <text class="kompass-label" x="152" y="62" text-anchor="middle">BALL</text>
@@ -1342,8 +1402,6 @@ select.inp option {
             <text class="kompass-label" x="152" y="164" text-anchor="middle">BALL</text>
             <text class="kompass-label" x="68" y="152" text-anchor="middle">BALL</text>
             <text class="kompass-label" x="68" y="164" text-anchor="middle">EROBERN</text>
-
-            <!-- Hub -->
             <circle cx="110" cy="110" r="30" fill="#101926" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
             <text class="kompass-center-txt" x="110" y="104" text-anchor="middle" style="font-size:8px; font-weight:900; fill:var(--primary);">TIPS/U</text>
             <text class="kompass-center-txt" x="110" y="116" text-anchor="middle">KOMPASS</text>
@@ -1364,14 +1422,11 @@ select.inp option {
         <button class="phase-chip" data-phase="erobern" onclick="filterLehre('erobern')"><span class="dot" style="background:#ea580c"></span>Ball erobern</button>
       </div>
 
-      <!-- ───────────── PHASE 1: WIR HABEN DEN BALL ───────────── -->
+      <!-- PHASE 1: WIR HABEN DEN BALL -->
       <div class="phase-block" data-phase="haben">
         <div class="phase-head">
           <span class="phase-dot" style="background:#059669;"></span>
-          <div>
-            <h3>Wir haben den Ball</h3>
-            <span class="phase-sub">Spiel gestalten – Tor erzielen</span>
-          </div>
+          <div><h3>Wir haben den Ball</h3><span class="phase-sub">Spiel gestalten – Tor erzielen</span></div>
         </div>
         <div class="ziele-box">
           <div class="ziele-lbl">Ziele</div>
@@ -1425,14 +1480,11 @@ select.inp option {
         </details>
       </div>
 
-      <!-- ───────────── PHASE 2: WIR VERLIEREN DEN BALL ───────────── -->
+      <!-- PHASE 2: WIR VERLIEREN DEN BALL -->
       <div class="phase-block" data-phase="verlieren">
         <div class="phase-head">
           <span class="phase-dot" style="background:#d97706;"></span>
-          <div>
-            <h3>Wir verlieren den Ball</h3>
-            <span class="phase-sub">Umschalten OFF – DEF</span>
-          </div>
+          <div><h3>Wir verlieren den Ball</h3><span class="phase-sub">Umschalten OFF – DEF</span></div>
         </div>
         <div class="ziele-box">
           <div class="ziele-lbl">Ziele</div>
@@ -1482,14 +1534,11 @@ select.inp option {
         </details>
       </div>
 
-      <!-- ───────────── PHASE 3: WIR HABEN DEN BALL NICHT ───────────── -->
+      <!-- PHASE 3: WIR HABEN DEN BALL NICHT -->
       <div class="phase-block" data-phase="habennicht">
         <div class="phase-head">
           <span class="phase-dot" style="background:#dc2626;"></span>
-          <div>
-            <h3>Wir haben den Ball nicht</h3>
-            <span class="phase-sub">Ball erobern – Tor verhindern</span>
-          </div>
+          <div><h3>Wir haben den Ball nicht</h3><span class="phase-sub">Ball erobern – Tor verhindern</span></div>
         </div>
         <div class="ziele-box">
           <div class="ziele-lbl">Ziele</div>
@@ -1541,14 +1590,11 @@ select.inp option {
         </details>
       </div>
 
-      <!-- ───────────── PHASE 4: WIR EROBERN DEN BALL ───────────── -->
+      <!-- PHASE 4: WIR EROBERN DEN BALL -->
       <div class="phase-block" data-phase="erobern">
         <div class="phase-head">
           <span class="phase-dot" style="background:#ea580c;"></span>
-          <div>
-            <h3>Wir erobern den Ball</h3>
-            <span class="phase-sub">Umschalten DEF – OFF</span>
-          </div>
+          <div><h3>Wir erobern den Ball</h3><span class="phase-sub">Umschalten DEF – OFF</span></div>
         </div>
         <div class="ziele-box">
           <div class="ziele-lbl">Ziele</div>
@@ -1603,17 +1649,12 @@ select.inp option {
       <p style="text-align:center; font-size:8px; color:var(--text-muted); margin-top:4px;">© 2017 SFV · Spielphilosophie Männer D</p>
     </section>
 
-
   </div>
 
-  <!-- ════════════════════════════════════════════════════════════════
-     Footer Branding
-     ════════════════════════════════════════════════════════════════ -->
+  <!-- Footer Branding -->
   <div class="app-footer">System &amp; Development by Dogus Kaplan</div>
 
-  <!-- ════════════════════════════════════════════════════════════════
-     Navigationsleiste (Bottom-Nav)
-     ════════════════════════════════════════════════════════════════ -->
+  <!-- Navigationsleiste (Bottom-Nav) -->
   <nav class="bottom-nav">
     <button id="nav-dashboard" class="nav-item active" onclick="switchTab('dashboard')">
       <svg viewBox="0 0 24 24" stroke-width="2.5"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
@@ -1627,6 +1668,10 @@ select.inp option {
       <svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       Bewertung
     </button>
+    <button id="nav-wettkampf" class="nav-item" onclick="switchTab('wettkampf')">
+      <svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+      Wettkampf
+    </button>
     <button id="nav-dateien" class="nav-item" onclick="switchTab('dateien')">
       <svg viewBox="0 0 24 24" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
       Zentrale
@@ -1637,6 +1682,25 @@ select.inp option {
     </button>
   </nav>
 
+  <!-- Wettkampf: Bottom-Sheet (Spieler-/Team-Picker) -->
+  <div class="tk-sheet-overlay" id="tk-sheet" hidden>
+    <div class="tk-sheet" role="dialog" aria-modal="true">
+      <div class="tk-sheet-head"><h3 id="tk-sheetTitle"></h3><button class="tk-icon-btn" id="tk-sheetClose" aria-label="Schließen">✕</button></div>
+      <div class="tk-sheet-body" id="tk-sheetBody"></div>
+    </div>
+  </div>
+
+  <!-- Wettkampf: Eigener Bestätigungsdialog -->
+  <div class="tk-modal-overlay" id="tk-confirm" hidden>
+    <div class="tk-modal" role="alertdialog" aria-modal="true">
+      <p id="tk-confirmMsg"></p>
+      <div class="tk-btn-row">
+        <button class="tk-btn tk-btn--ghost" id="tk-confirmNo" style="margin-bottom:0;">Abbrechen</button>
+        <button class="tk-btn tk-btn--accent" id="tk-confirmYes" style="margin-bottom:0;">OK</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Node -->
   <div id="toast">Änderung gespeichert</div>
 
@@ -1644,7 +1708,7 @@ select.inp option {
      ⚙️ APP ENGINE (Vanilla JS)
      ════════════════════════════════════════════════════════════════ -->
   <script>
-    // 💾 INDEXEDDB MANAGER (Für ewige, unzerstörbare Datensicherheit)
+    // 💾 INDEXEDDB MANAGER
     const DB_NAME = 'TIPSU_LocalAPP_DB';
     const DB_VERSION = 1;
     const STORE_NAME = 'app_state_store';
@@ -1654,27 +1718,13 @@ select.inp option {
       return new Promise((resolve, reject) => {
         try {
           const request = indexedDB.open(DB_NAME, DB_VERSION);
-          
-          request.onerror = function(event) {
-            console.error("IndexedDB Fehler:", event);
-            resolve(false);
-          };
-          
-          request.onsuccess = function(event) {
-            dbInstance = event.target.result;
-            resolve(true);
-          };
-          
+          request.onerror = function(event) { console.error("IndexedDB Fehler:", event); resolve(false); };
+          request.onsuccess = function(event) { dbInstance = event.target.result; resolve(true); };
           request.onupgradeneeded = function(event) {
             const db = event.target.result;
-            if (!db.objectStoreNames.contains(STORE_NAME)) {
-              db.createObjectStore(STORE_NAME);
-            }
+            if (!db.objectStoreNames.contains(STORE_NAME)) { db.createObjectStore(STORE_NAME); }
           };
-        } catch (e) {
-          console.error("IndexedDB Support fehlt:", e);
-          resolve(false);
-        }
+        } catch (e) { console.error("IndexedDB Support fehlt:", e); resolve(false); }
       });
     }
 
@@ -1685,17 +1735,9 @@ select.inp option {
           const transaction = dbInstance.transaction([STORE_NAME], 'readwrite');
           const store = transaction.objectStore(STORE_NAME);
           const request = store.put(JSON.parse(JSON.stringify(state)), 'current_state');
-          
-          request.onsuccess = function() {
-            resolve(true);
-          };
-          request.onerror = function() {
-            resolve(false);
-          };
-        } catch (e) {
-          console.error("IndexedDB Fehler beim Speichern:", e);
-          resolve(false);
-        }
+          request.onsuccess = function() { resolve(true); };
+          request.onerror = function() { resolve(false); };
+        } catch (e) { console.error("IndexedDB Fehler beim Speichern:", e); resolve(false); }
       });
     }
 
@@ -1706,45 +1748,31 @@ select.inp option {
           const transaction = dbInstance.transaction([STORE_NAME], 'readonly');
           const store = transaction.objectStore(STORE_NAME);
           const request = store.get('current_state');
-          
-          request.onsuccess = function(event) {
-            resolve(event.target.result || null);
-          };
-          request.onerror = function() {
-            resolve(null);
-          };
-        } catch (e) {
-          console.error("IndexedDB Fehler beim Laden:", e);
-          resolve(null);
-        }
+          request.onsuccess = function(event) { resolve(event.target.result || null); };
+          request.onerror = function() { resolve(null); };
+        } catch (e) { console.error("IndexedDB Fehler beim Laden:", e); resolve(null); }
       });
     }
 
     function showDbStatus(status) {
       const badge = document.getElementById('db-status-badge');
       if (!badge) return;
-      
       if (status === 'saving') {
-        badge.style.background = 'rgba(245, 158, 11, 0.15)';
-        badge.style.color = '#f59e0b';
+        badge.style.background = 'rgba(245, 158, 11, 0.15)'; badge.style.color = '#f59e0b';
         badge.innerHTML = '<span style="width: 6px; height: 6px; background: #f59e0b; border-radius: 50%; display: inline-block; animation: pulse 0.8s infinite;"></span> Speichert...';
       } else if (status === 'saved') {
-        badge.style.background = 'rgba(5, 150, 105, 0.15)';
-        badge.style.color = '#34d399';
+        badge.style.background = 'rgba(5, 150, 105, 0.15)'; badge.style.color = '#34d399';
         badge.innerHTML = '<span style="width: 6px; height: 6px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #34d399;"></span> Gesichert';
       } else if (status === 'error') {
-        badge.style.background = 'rgba(220, 38, 38, 0.15)';
-        badge.style.color = '#f87171';
+        badge.style.background = 'rgba(220, 38, 38, 0.15)'; badge.style.color = '#f87171';
         badge.innerHTML = '<span style="width: 6px; height: 6px; background: #f87171; border-radius: 50%; display: inline-block;"></span> Speicherfehler';
       }
     }
 
-    // 📋 BEURTEILUNGSKRITERIEN (TIPS/U Detaillierte Version)
+    // 📋 BEURTEILUNGSKRITERIEN (TIPS/U)
     const BEURTEILUNG_KRITERIEN = {
       technik: {
-        label: 'Technik (T)',
-        slogan: '«Der Ball ist sein/ihr Freund!»',
-        desc: 'Fliessende Bewegungen, Präzision, Dosierung',
+        label: 'Technik (T)', slogan: '«Der Ball ist sein/ihr Freund!»', desc: 'Fliessende Bewegungen, Präzision, Dosierung',
         behaviors: [
           'überzeugt durch enges, rhythmisches Ballführen.',
           'schiesst und passt beidfüssig.',
@@ -1755,9 +1783,7 @@ select.inp option {
         ]
       },
       intelligenz: {
-        label: 'Spielintelligenz (I)',
-        slogan: '«Er/Sie verhält sich SMART!»',
-        desc: 'Wahrnehmung, Entscheidung, Positionierung',
+        label: 'Spielintelligenz (I)', slogan: '«Er/Sie verhält sich SMART!»', desc: 'Wahrnehmung, Entscheidung, Positionierung',
         behaviors: [
           'bezieht Kontext, Stärken/Schwächen und die Spielidee in Aktionen mit ein (S).',
           'antizipiert, bleibt ruhig und agiert im richtigen Moment (M).',
@@ -1767,9 +1793,7 @@ select.inp option {
         ]
       },
       persoenlichkeit: {
-        label: 'Persönlichkeit (P)',
-        slogan: '«Er/Sie hat und gibt Energie!»',
-        desc: 'Selbstvertrauen, Motivation, Respekt',
+        label: 'Persönlichkeit (P)', slogan: '«Er/Sie hat und gibt Energie!»', desc: 'Selbstvertrauen, Motivation, Respekt',
         behaviors: [
           'zeigt Emotionen und Spielfreude.',
           'ist initiativ und will mitspielen > viele Ballkontakte.',
@@ -1782,9 +1806,7 @@ select.inp option {
         ]
       },
       schnelligkeit: {
-        label: 'Schnelligkeit (S)',
-        slogan: '«Er/Sie beschleunigt das Spiel!»',
-        desc: 'Explosivität, Dynamik, Intensität',
+        label: 'Schnelligkeit (S)', slogan: '«Er/Sie beschleunigt das Spiel!»', desc: 'Explosivität, Dynamik, Intensität',
         behaviors: [
           'ist in Bereitschaft und steht auf dem Vorderfuss.',
           'startet blitzschnell und kraftvoll.',
@@ -1794,9 +1816,7 @@ select.inp option {
         ]
       },
       umfeld: {
-        label: 'Umfeld (U)',
-        slogan: '«Er/Sie hat ein stabiles Fundament!»',
-        desc: 'Balance Alltag, Support, Eigenverantwortung, Logistik',
+        label: 'Umfeld (U)', slogan: '«Er/Sie hat ein stabiles Fundament!»', desc: 'Balance Alltag, Support, Eigenverantwortung, Logistik',
         behaviors: [
           'balanciert Schule, Beruf und Fussball optimal (Belastungssteuerung).',
           'erfährt einen förderlichen familiären Support ohne falschen Druck.',
@@ -1807,59 +1827,79 @@ select.inp option {
     };
 
     // 💾 LOKALE DATENBANK (In-Memory State)
+    // Erweiterungen für Wettkampf: teams, tapperArchive, sessionArchive + quarterPoints je Spieler
     let APP_STATE = {
       teamName: 'Meine Mannschaft',
-      players: [] // Array aus: { id, nr, name, fuss, geb, verein, tw, ratings: { technik, intelligenz, persoenlichkeit, schnelligkeit, umfeld }, behaviorChecklist, notes }
+      players: [],
+      teams: [],
+      tapperArchive: [],
+      sessionArchive: []
     };
 
-    // 💾 INITIALER U12 KADER (23 SPIELER) FÜR AUTOMATISCHES SEEDING
     const INITIAL_KADER = []; // Blanko – Spieler werden vom Trainer selbst angelegt
+
+    // Stellt sicher, dass alle Wettkampf-Felder existieren (Migration alter Backups)
+    function ensureTournamentFields() {
+      if (!Array.isArray(APP_STATE.teams)) APP_STATE.teams = [];
+      if (!Array.isArray(APP_STATE.tapperArchive)) APP_STATE.tapperArchive = [];
+      if (!Array.isArray(APP_STATE.sessionArchive)) APP_STATE.sessionArchive = [];
+      if (!Array.isArray(APP_STATE.players)) APP_STATE.players = [];
+      APP_STATE.players.forEach(p => { if (typeof p.quarterPoints !== 'number') p.quarterPoints = 0; });
+      APP_STATE.teams.forEach(t => {
+        if (!Array.isArray(t.playerIds)) t.playerIds = [];
+        if (typeof t.sessionPoints !== 'number') t.sessionPoints = 0;
+      });
+    }
 
     // 🔄 TABS SWITCHER
     function switchTab(tabId) {
       document.querySelectorAll('.app-section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-      
       document.getElementById('section-' + tabId).classList.add('active');
       document.getElementById('nav-' + tabId).classList.add('active');
-      
-      // Update data when opening dashboard
-      if (tabId === 'dashboard') {
-        renderDashboardStats();
-      }
-      
-      // Sync player selector when opening rating tab
-      if (tabId === 'bewertungen') {
-        populateRateSelector();
-      }
+
+      if (tabId === 'dashboard') { renderDashboardStats(); }
+      if (tabId === 'bewertungen') { populateRateSelector(); }
+      if (tabId === 'wettkampf') { switchWettkampf(tkActiveSub || 'turnier'); }
     }
 
-    // 📚 LEHRE: Phasen-Filter (Kompass + Chips)
+    // 🏆 Wettkampf-Unternavigation
+    let tkActiveSub = 'turnier';
+    function switchWettkampf(sub) {
+      tkActiveSub = sub;
+      document.querySelectorAll('#section-wettkampf .wk-sub').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('#section-wettkampf .academy-sub-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.wk === sub));
+      const target = document.getElementById('wk-' + sub);
+      if (target) target.classList.add('active');
+      if (sub === 'turnier') renderTeams();
+      else if (sub === 'ranking') renderRanking();
+      else if (sub === 'tapper') { renderTapControls(); renderTapGrid(); }
+      else if (sub === 'archiv') renderArchive();
+    }
+
+    // 📚 LEHRE: Phasen-Filter
     function filterLehre(key) {
-      // Phasen-Blöcke ein-/ausblenden
       document.querySelectorAll('#section-lehre .phase-block').forEach(block => {
         const match = (key === 'all' || block.dataset.phase === key);
         block.classList.toggle('hidden', !match);
       });
-      // Chips aktiv setzen
       document.querySelectorAll('#lehre-phase-filter .phase-chip').forEach(chip => {
         chip.classList.toggle('active', chip.dataset.phase === key);
       });
-      // Kompass-Quadranten dimmen
       document.querySelectorAll('#section-lehre .kompass-quad').forEach(q => {
         q.classList.toggle('dimmed', key !== 'all' && q.dataset.phase !== key);
       });
-      // Sanft zum Inhalt scrollen, wenn eine einzelne Phase gewählt wurde
       if (key !== 'all') {
         const target = document.querySelector('#section-lehre .phase-block:not(.hidden)');
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
-    // 🔔 TOAST NOTIFICATIONS
-    function showToast(msg) {
+    // 🔔 TOAST (jetzt mit optionalem Fehlerstatus)
+    function showToast(msg, isError) {
       const toast = document.getElementById('toast');
       toast.textContent = msg;
+      toast.classList.toggle('err', !!isError);
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 2000);
     }
@@ -1867,11 +1907,8 @@ select.inp option {
     // ──────────────────────────────────────────────────────────────
     // 👤 KADER-VERWALTUNG (CRUD)
     // ──────────────────────────────────────────────────────────────
-    
-    // Spieler anlegen / aktualisieren
     function handlePlayerSubmit(e) {
       e.preventDefault();
-      
       const editId = document.getElementById('edit-player-id').value;
       const nr = document.getElementById('p-nr').value.trim();
       const name = document.getElementById('p-name').value.trim();
@@ -1879,69 +1916,47 @@ select.inp option {
       const geb = document.getElementById('p-geb').value;
       const verein = document.getElementById('p-verein').value.trim();
       const tw = document.getElementById('p-tw').checked;
-      
       if (!nr || !name) return;
-      
+
       if (editId) {
-        // Edit Mode
         const p = APP_STATE.players.find(x => x.id === editId);
         if (p) {
-          p.nr = nr;
-          p.name = name;
-          p.fuss = fuss;
-          p.geb = geb;
-          p.verein = verein;
-          p.tw = tw;
+          p.nr = nr; p.name = name; p.fuss = fuss; p.geb = geb; p.verein = verein; p.tw = tw;
           showToast('✓ Spielerdaten aktualisiert');
         }
       } else {
-        // New Player Mode
         const newPlayer = {
           id: 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
-          nr: nr,
-          name: name,
-          fuss: fuss,
-          geb: geb,
-          verein: verein,
-          tw: tw,
+          nr: nr, name: name, fuss: fuss, geb: geb, verein: verein, tw: tw,
           ratings: { technik: null, intelligenz: null, persoenlichkeit: null, schnelligkeit: null, umfeld: null },
           behaviorChecklist: {},
-          notes: ''
+          notes: '',
+          quarterPoints: 0   // NEU: Punktekonto für Wettkampf-Ranking
         };
         APP_STATE.players.push(newPlayer);
         showToast('✓ Neuer Spieler angelegt');
       }
-      
+
       resetPlayerForm();
-      saveStateToLocalStorageBackup(); // Sichert State im Browser localStorage als Notfall-Kopie
+      saveStateToLocalStorageBackup();
       renderKaderList();
     }
-    
-    // Kaderliste im UI zeichnen
+
     function renderKaderList() {
       const list = document.getElementById('kader-list');
       list.innerHTML = '';
-      
       if (APP_STATE.players.length === 0) {
-        list.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-muted);font-size:11px;">Noch kein Spieler im Kader.</div>`;
+        list.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-muted);font-size:11px;">Noch kein Spieler im Kader.</div>';
         return;
       }
-      
-      // Sortieren: Rückennummer aufsteigend
       const sorted = [...APP_STATE.players].sort((a,b) => parseInt(a.nr || 0) - parseInt(b.nr || 0));
-      
       sorted.forEach(p => {
         const item = document.createElement('div');
         item.className = 'list-item';
-        
-        // Namens-Kürzel
         const parts = p.name.split(',');
         const initials = ((parts[0]?.trim()[0] || '') + (parts[1]?.trim()[0] || '')).toUpperCase() || 'SP';
-        
-        // Berechnung des Schnitts
         const scores = Object.values(p.ratings).filter(v => v !== null);
         const avg = scores.length ? (scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(2) : null;
-        
         item.innerHTML = `
           <div class="avatar">${initials}</div>
           <div style="flex:1; min-width:0;">
@@ -1963,8 +1978,6 @@ select.inp option {
             </button>
           </div>
         `;
-        
-        // Klick auf Item führt direkt zum Bewertungs-Tab für diesen Spieler
         item.onclick = (e) => {
           if (e.target.tagName !== 'button' && e.target.tagName !== 'svg' && e.target.tagName !== 'path' && !e.target.closest('button')) {
             switchTab('bewertungen');
@@ -1972,17 +1985,14 @@ select.inp option {
             loadPlayerRating();
           }
         };
-        
         list.appendChild(item);
       });
     }
 
-    // Editieren einleiten
     function editPlayer(e, id) {
       e.stopPropagation();
       const p = APP_STATE.players.find(x => x.id === id);
       if (!p) return;
-      
       document.getElementById('form-title').textContent = 'Spieler bearbeiten';
       document.getElementById('edit-player-id').value = p.id;
       document.getElementById('p-nr').value = p.nr;
@@ -1991,22 +2001,20 @@ select.inp option {
       document.getElementById('p-geb').value = p.geb;
       document.getElementById('p-verein').value = p.verein || '';
       document.getElementById('p-tw').checked = p.tw;
-      
       document.getElementById('btn-save').textContent = 'Änderungen speichern';
       document.getElementById('btn-cancel-edit').style.display = 'inline-flex';
-      
-      // Scrolle zum Formular hoch
       document.getElementById('player-form').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Löschen
     function deletePlayer(e, id) {
       e.stopPropagation();
       const p = APP_STATE.players.find(x => x.id === id);
       if (!p) return;
-      
       if (confirm(`Spieler „${p.name}“ wirklich aus der App löschen?`)) {
         APP_STATE.players = APP_STATE.players.filter(x => x.id !== id);
+        // NEU: Kopplung – Spieler auch aus Teams & Tapper-Fokus entfernen
+        if (Array.isArray(APP_STATE.teams)) APP_STATE.teams.forEach(t => { t.playerIds = (t.playerIds||[]).filter(x => x !== id); });
+        if (tkTapper && Array.isArray(tkTapper.focus)) tkTapper.focus = tkTapper.focus.filter(x => x !== id);
         showToast('Spieler gelöscht');
         saveStateToLocalStorageBackup();
         renderKaderList();
@@ -2022,7 +2030,6 @@ select.inp option {
       document.getElementById('p-geb').value = '';
       document.getElementById('p-verein').value = '';
       document.getElementById('p-tw').checked = false;
-      
       document.getElementById('btn-save').textContent = 'Spieler anlegen';
       document.getElementById('btn-cancel-edit').style.display = 'none';
     }
@@ -2031,33 +2038,19 @@ select.inp option {
     // 📊 DASHBOARD & QUICKSTATS
     // ──────────────────────────────────────────────────────────────
     function renderDashboardStats() {
-      // Teamname anzeigen
       document.getElementById('dash-team-name').textContent = APP_STATE.teamName || 'Meine Mannschaft';
       document.getElementById('dash-kader-count').textContent = APP_STATE.players.length;
       document.getElementById('stat-total').textContent = APP_STATE.players.length;
-      
-      let totalSum = 0;
-      let ratedCount = 0;
-      
+      let totalSum = 0; let ratedCount = 0;
       APP_STATE.players.forEach(p => {
         const scores = Object.values(p.ratings).filter(v => v !== null);
-        if (scores.length > 0) {
-          totalSum += scores.reduce((a,b)=>a+b, 0) / scores.length;
-          ratedCount++;
-        }
+        if (scores.length > 0) { totalSum += scores.reduce((a,b)=>a+b, 0) / scores.length; ratedCount++; }
       });
-      
       const teamAvg = ratedCount > 0 ? (totalSum / ratedCount).toFixed(2) : '—';
       document.getElementById('stat-avg').textContent = teamAvg;
-
-      // Falls die aufklappbare Liste offen ist, aktualisiere sie
-      if (dashKaderOpen) {
-        renderDashKaderList();
-      }
-
+      if (dashKaderOpen) { renderDashKaderList(); }
     }
 
-    // 🏆 MANNSCHAFT / TEAM VERWALTUNG
     function renameTeam() {
       const name = prompt('Gib den Namen deines Teams / deiner Mannschaft ein:', APP_STATE.teamName || 'Meine Mannschaft');
       if (name !== null) {
@@ -2069,40 +2062,28 @@ select.inp option {
       }
     }
 
-    // 📋 COLLAPSIBLE KADER-LISTE (DASHBOARD)
     let dashKaderOpen = false;
     function toggleDashKader() {
       dashKaderOpen = !dashKaderOpen;
       const content = document.getElementById('dash-kader-content');
       const chevron = document.getElementById('dash-kader-chevron');
-      
-      if (dashKaderOpen) {
-        content.style.display = 'block';
-        chevron.style.transform = 'rotate(180deg)';
-        renderDashKaderList();
-      } else {
-        content.style.display = 'none';
-        chevron.style.transform = 'rotate(0deg)';
-      }
+      if (dashKaderOpen) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; renderDashKaderList(); }
+      else { content.style.display = 'none'; chevron.style.transform = 'rotate(0deg)'; }
     }
 
     function renderDashKaderList() {
       const container = document.getElementById('dash-kader-content');
       container.innerHTML = '';
-      
       if (APP_STATE.players.length === 0) {
         container.innerHTML = '<div style="font-size:11px; color:var(--text-muted); text-align:center; padding:12px 0;">Noch keine Spieler erfasst. Gehe auf „Kader“, um zu beginnen!</div>';
         return;
       }
-
       const sorted = [...APP_STATE.players].sort((a,b) => parseInt(a.nr || 0) - parseInt(b.nr || 0));
       sorted.forEach(p => {
         const scores = Object.values(p.ratings).filter(v => v !== null);
         const avg = scores.length ? (scores.reduce((a,b)=>a+b, 0) / scores.length).toFixed(2) : '—';
-        
         const item = document.createElement('div');
         item.style.cssText = 'padding:10px 12px; background:rgba(255,255,255,0.02); border:1px solid var(--card-border); border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;';
-        
         item.innerHTML = `
           <div style="min-width:0; flex:1; padding-right:8px;">
             <div style="font-size:12.5px; font-weight:700; color:var(--text-main); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${p.nr} · ${p.name}</div>
@@ -2113,15 +2094,12 @@ select.inp option {
           </div>
           <div style="font-size:12px; font-weight:900; color:var(--primary); flex-shrink:0;">Ø ${avg}</div>
         `;
-        
-        // Klick auf den Spieler in der Liste führt direkt zu seiner Bewertung
         item.style.cursor = 'pointer';
         item.onclick = () => {
           switchTab('bewertungen');
           document.getElementById('select-rate-player').value = p.id;
           loadPlayerRating();
         };
-        
         container.appendChild(item);
       });
     }
@@ -2129,122 +2107,73 @@ select.inp option {
     // ──────────────────────────────────────────────────────────────
     // ⭐ BEWERTUNGS-LOGIK (TIPS/U)
     // ──────────────────────────────────────────────────────────────
-    
-    // Fülle Dropdown
     function populateRateSelector() {
       const sel = document.getElementById('select-rate-player');
       const dashSel = document.getElementById('dash-print-player');
       const curVal = sel.value;
       const curDashVal = dashSel ? dashSel.value : '';
-      
       const optionsHtml = '<option value="">— Bitte Spieler wählen —</option>';
       const dashOptionsHtml = '<option value="">— Spieler auswählen —</option>';
-      
       let itemsHtml = '';
       const sorted = [...APP_STATE.players].sort((a,b) => parseInt(a.nr || 0) - parseInt(b.nr || 0));
       sorted.forEach(p => {
         itemsHtml += `<option value="${p.id}">${p.nr} · ${p.name}${p.verein ? ' (' + p.verein + ')' : ''}</option>`;
       });
-      
       sel.innerHTML = optionsHtml + itemsHtml;
-      if (dashSel) {
-        dashSel.innerHTML = dashOptionsHtml + itemsHtml;
-      }
-      
-      // Behalte Wert, falls vorhanden
-      if (curVal && APP_STATE.players.find(x=>x.id===curVal)) {
-        sel.value = curVal;
-      } else {
-        document.getElementById('rating-editor-card').style.display = 'none';
-      }
-      
-      if (dashSel && curDashVal && APP_STATE.players.find(x=>x.id===curDashVal)) {
-        dashSel.value = curDashVal;
-      }
+      if (dashSel) { dashSel.innerHTML = dashOptionsHtml + itemsHtml; }
+      if (curVal && APP_STATE.players.find(x=>x.id===curVal)) { sel.value = curVal; }
+      else { document.getElementById('rating-editor-card').style.display = 'none'; }
+      if (dashSel && curDashVal && APP_STATE.players.find(x=>x.id===curDashVal)) { dashSel.value = curDashVal; }
     }
 
-    // Lade Spieler zur Bewertung
     function loadPlayerRating() {
       const pid = document.getElementById('select-rate-player').value;
       const card = document.getElementById('rating-editor-card');
-      
-      if (!pid) {
-        card.style.display = 'none';
-        return;
-      }
-      
+      if (!pid) { card.style.display = 'none'; return; }
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
-      
-      // Avatar-Kürzel
       const parts = p.name.split(',');
       const initials = ((parts[0]?.trim()[0] || '') + (parts[1]?.trim()[0] || '')).toUpperCase() || 'SP';
-      
       document.getElementById('rate-avatar').textContent = initials;
       document.getElementById('rate-name').textContent = p.name;
       document.getElementById('rate-nr').textContent = `Nr. ${p.nr} · Fuss: ${p.fuss}${p.verein ? ' · ' + p.verein : ''}`;
       document.getElementById('rate-notizen').value = p.notes || '';
-      
       card.style.display = 'block';
-      
-      // Score-Buttons zeichnen / synchronisieren
       syncRatingButtons(p);
-      
-      // Verhaltenschecklisten zeichnen
       renderBehaviorChecklists(p);
     }
 
-    // Aktiviert die korrekten Bewertungsknöpfe (1-4)
     function syncRatingButtons(player) {
       const dims = ['technik', 'intelligenz', 'persoenlichkeit', 'schnelligkeit', 'umfeld'];
-      
       dims.forEach(dim => {
         const val = player.ratings[dim];
         const btnRow = document.querySelector(`.score-buttons[data-dim="${dim}"]`);
-        
         btnRow.querySelectorAll('.score-btn').forEach(btn => {
-          btn.className = 'score-btn'; // Zurücksetzen
-          
+          btn.className = 'score-btn';
           const num = parseInt(btn.textContent);
-          if (val === num) {
-            btn.classList.add(`active-${num}`);
-          }
+          if (val === num) { btn.classList.add(`active-${num}`); }
         });
       });
-      
-      // Durchschnitt berechnen
       const scores = Object.values(player.ratings).filter(v => v !== null);
       const avg = scores.length ? (scores.reduce((a,b)=>a+b, 0) / scores.length).toFixed(2) : '—';
       document.getElementById('rate-average-val').textContent = avg;
     }
 
-    // Klick auf Bewertungstaste
     function setScore(dim, scoreVal) {
       const pid = document.getElementById('select-rate-player').value;
       if (!pid) return;
-      
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
-      
-      // Toggelt Wert (falls derselbe gedrückt wurde)
-      if (p.ratings[dim] === scoreVal) {
-        p.ratings[dim] = null;
-      } else {
-        p.ratings[dim] = scoreVal;
-      }
-      
+      if (p.ratings[dim] === scoreVal) { p.ratings[dim] = null; } else { p.ratings[dim] = scoreVal; }
       syncRatingButtons(p);
       saveStateToLocalStorageBackup();
     }
 
-    // Notizen speichern
     function saveRatingNotes() {
       const pid = document.getElementById('select-rate-player').value;
       if (!pid) return;
-      
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
-      
       p.notes = document.getElementById('rate-notizen').value;
       saveStateToLocalStorageBackup();
     }
@@ -2252,34 +2181,19 @@ select.inp option {
     // ──────────────────────────────────────────────────────────────
     // 💾 BACKUP & FILE-CENTRALE (JSON IMPORT/EXPORT)
     // ──────────────────────────────────────────────────────────────
-    
-    // 💾 Backup-Sicherung im LocalStorage & IndexedDB (Doppelte, redundante Sicherheit)
     function saveStateToLocalStorageBackup() {
-      // 1. In localStorage sichern
       localStorage.setItem('tipsu_localapp_backup', JSON.stringify(APP_STATE));
-      
-      // Status auf "Speichert..." setzen
       showDbStatus('saving');
-      
-      // 2. In IndexedDB sichern
       saveToIndexedDB(APP_STATE).then(success => {
-        if (success) {
-          setTimeout(() => showDbStatus('saved'), 300);
-        } else {
-          showDbStatus('error');
-        }
+        if (success) { setTimeout(() => showDbStatus('saved'), 300); }
+        else { showDbStatus('error'); }
       });
     }
 
-    // Lade Stand aus LocalStorage & IndexedDB (beim Starten mit Auto-Migration)
     async function loadStateFromLocalStorageBackup() {
       showDbStatus('saving');
-      
-      // 1. Initialisiere IndexedDB (TIPSU_LocalAPP_DB)
       const dbReady = await initIndexedDB();
 
-      // 1b. Einmalige Bereinigung: Alt-Daten (z.B. vorbefüllter Kader) entfernen,
-      //     wenn die App-Version sich geändert hat. Danach startet der Kader blanko.
       const CURRENT_SCHEMA = 'tipsu-blank-2026';
       try {
         if (localStorage.getItem('tipsu_schema_version') !== CURRENT_SCHEMA) {
@@ -2290,396 +2204,187 @@ select.inp option {
           localStorage.setItem('tipsu_schema_version', CURRENT_SCHEMA);
         }
       } catch (e) { console.error('Schema-Bereinigung fehlgeschlagen:', e); }
-      
+
       let loadedState = null;
-      
-      if (dbReady) {
-        // Versuche aus IndexedDB zu laden
-        loadedState = await loadFromIndexedDB();
-      }
-      
-      // 2. Fallback auf neuen localStorage, falls in IndexedDB nichts ist
+      if (dbReady) { loadedState = await loadFromIndexedDB(); }
+
       if (!loadedState) {
         const saved = localStorage.getItem('tipsu_localapp_backup');
-        if (saved) {
-          try {
-            loadedState = JSON.parse(saved);
-          } catch (e) {
-            console.error(e);
-          }
-        }
+        if (saved) { try { loadedState = JSON.parse(saved); } catch (e) { console.error(e); } }
       }
-      
-      // 3. Fallback auf alte "PrefOS" localStorage-Sicherung (für reibungslose Migration!)
+
       if (!loadedState) {
         const legacySaved = localStorage.getItem('prefos_localapp_backup');
         if (legacySaved) {
           try {
             loadedState = JSON.parse(legacySaved);
-            console.log("Alte PrefOS-Kaderdaten geladen. Migriere zu TIPS/U...");
-            // Migriere in neuen Speicher
             localStorage.setItem('tipsu_localapp_backup', JSON.stringify(loadedState));
-            if (dbReady && loadedState) {
-              await saveToIndexedDB(loadedState);
-            }
-          } catch (e) {
-            console.error(e);
-          }
+            if (dbReady && loadedState) { await saveToIndexedDB(loadedState); }
+          } catch (e) { console.error(e); }
         }
       }
-      
-      // 4. Blanko-Start: leerer Kader, falls noch nichts gespeichert ist
+
       if (!loadedState || !loadedState.players || loadedState.players.length === 0) {
-        console.log("Blanko-Start: leerer Kader. Spieler werden vom Trainer angelegt.");
         const initialPlayers = INITIAL_KADER.map(p => ({
-          id: p.id,
-          nr: p.nr,
-          name: p.name,
-          fuss: p.fuss,
-          geb: p.geb,
-          verein: p.verein,
-          tw: p.tw,
+          id: p.id, nr: p.nr, name: p.name, fuss: p.fuss, geb: p.geb, verein: p.verein, tw: p.tw,
           ratings: { technik: null, intelligenz: null, persoenlichkeit: null, schnelligkeit: null, umfeld: null },
-          behaviorChecklist: {},
-          notes: ''
+          behaviorChecklist: {}, notes: '', quarterPoints: 0
         }));
-        loadedState = {
-          teamName: 'Meine Mannschaft',
-          players: initialPlayers
-        };
-        // Direkt im localStorage und IndexedDB sichern
+        loadedState = { teamName: 'Meine Mannschaft', players: initialPlayers, teams: [], tapperArchive: [], sessionArchive: [] };
         localStorage.setItem('tipsu_localapp_backup', JSON.stringify(loadedState));
-        if (dbReady) {
-          await saveToIndexedDB(loadedState);
-        }
+        if (dbReady) { await saveToIndexedDB(loadedState); }
       }
 
       if (loadedState) {
         APP_STATE = loadedState;
         if (!APP_STATE.players) APP_STATE.players = [];
         if (!APP_STATE.teamName) APP_STATE.teamName = 'Meine Mannschaft';
+        ensureTournamentFields(); // NEU: Wettkampf-Felder garantieren
         showDbStatus('saved');
       } else {
+        ensureTournamentFields();
         showDbStatus('saved');
       }
     }
 
     // 🖨️ PDF EXPORT - EINZELNE SEITE ZEICHNEN
     function drawPlayerPage(doc, p) {
-      const PW = 210;
-      const PH = 297;
-      const margin = 20;
-
-      // Header-Titel & Branding (Clean B&W)
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(20);
-      doc.setTextColor(0, 0, 0);
+      const PW = 210; const PH = 297; const margin = 20;
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(20); doc.setTextColor(0, 0, 0);
       doc.text('TIPS/U · Leistungsbericht', margin, 24);
-
-      // Datum automatisch vom System (oben rechts)
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(10);
-      doc.setTextColor(0, 0, 0);
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(10); doc.setTextColor(0, 0, 0);
       doc.text(new Date().toLocaleDateString('de-DE'), PW - margin, 24, { align: 'right' });
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(7.5);
-      doc.setTextColor(140, 140, 140);
+      doc.setFont('Helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(140, 140, 140);
       doc.text('System & Development by Dogus Kaplan  ·  100% Offline-Sicherheit', margin, 29.5);
+      doc.setDrawColor(0, 0, 0); doc.setLineWidth(0.6); doc.line(margin, 32, PW - margin, 32);
 
-      // Horizontale Trennlinie
-      doc.setDrawColor(0, 0, 0);
-      doc.setLineWidth(0.6);
-      doc.line(margin, 32, PW - margin, 32);
-
-      // --- STAMMDATEN ---
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
-      doc.setTextColor(0, 0, 0);
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0, 0, 0);
       doc.text('SPIELER-STAMMDATEN', margin, 41);
-
-      // Umrahmung für Stammdaten-Box
-      doc.setDrawColor(180, 180, 180);
-      doc.setLineWidth(0.2);
-      doc.rect(margin, 44, PW - margin * 2, 23, 'S');
-
-      // Labels & Werte positionieren
-      doc.setFontSize(9.5);
-      doc.setFont('Helvetica', 'bold');
-      doc.text('Name:', margin + 5, 50);
-      doc.text('Rückennummer:', margin + 5, 56);
-      doc.text('Starker Fuß:', margin + 5, 62);
-
-      doc.text('Geburtsdatum:', margin + 95, 50);
-      doc.text('Kader-Rolle:', margin + 95, 56);
-      doc.text('Verein / Team:', margin + 95, 62);
-
+      doc.setDrawColor(180, 180, 180); doc.setLineWidth(0.2); doc.rect(margin, 44, PW - margin * 2, 23, 'S');
+      doc.setFontSize(9.5); doc.setFont('Helvetica', 'bold');
+      doc.text('Name:', margin + 5, 50); doc.text('Rückennummer:', margin + 5, 56); doc.text('Starker Fuß:', margin + 5, 62);
+      doc.text('Geburtsdatum:', margin + 95, 50); doc.text('Kader-Rolle:', margin + 95, 56); doc.text('Verein / Team:', margin + 95, 62);
       doc.setFont('Helvetica', 'normal');
-      doc.text(p.name || '—', margin + 34, 50);
-      doc.text(p.nr || '—', margin + 34, 56);
+      doc.text(p.name || '—', margin + 34, 50); doc.text(p.nr || '—', margin + 34, 56);
       doc.text(p.fuss === 'R' ? 'Rechts' : (p.fuss === 'L' ? 'Links' : 'Beidseitig'), margin + 34, 62);
-
       doc.text(p.geb ? new Date(p.geb).toLocaleDateString('de-DE') : '—', margin + 125, 50);
-      doc.text(p.tw ? 'Torhüter (TW)' : 'Feldspieler', margin + 125, 56);
-      doc.text(p.verein || '—', margin + 125, 62);
+      doc.text(p.tw ? 'Torhüter (TW)' : 'Feldspieler', margin + 125, 56); doc.text(p.verein || '—', margin + 125, 62);
 
-      // --- BEWERTUNGSMATRIX & RADAR-ÜBERSICHT ---
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(11);
       doc.text('TIPS/U ENTWICKLUNGSSTAND & RADAR-ÜBERSICHT', margin, 77);
 
-      const tableBody = [];
-      const dims = ['technik', 'intelligenz', 'persoenlichkeit', 'schnelligkeit', 'umfeld'];
-      
+      const tableBody = []; const dims = ['technik', 'intelligenz', 'persoenlichkeit', 'schnelligkeit', 'umfeld'];
       dims.forEach(dim => {
         const val = p.ratings[dim];
         const scoreStr = val ? `${val}.00 / 4.00` : '—';
         const krit = BEURTEILUNG_KRITERIEN[dim];
-        
-        // Finde abgehakte Verhaltenspunkte
         let checkedBehaviors = [];
         if (p.behaviorChecklist) {
-          krit.behaviors.forEach((beh, idx) => {
-            if (p.behaviorChecklist[`${dim}_${idx}`] === true) {
-              checkedBehaviors.push(`- ${beh}`);
-            }
-          });
+          krit.behaviors.forEach((beh, idx) => { if (p.behaviorChecklist[`${dim}_${idx}`] === true) { checkedBehaviors.push(`- ${beh}`); } });
         }
-        
         let descText = krit.desc;
-        if (checkedBehaviors.length > 0) {
-          descText += '\n\nBeobachtetes Verhalten:\n' + checkedBehaviors.join('\n');
-        }
-        
-        tableBody.push([
-          `${krit.label}\n${krit.slogan}`,
-          descText,
-          scoreStr
-        ]);
+        if (checkedBehaviors.length > 0) { descText += '\n\nBeobachtetes Verhalten:\n' + checkedBehaviors.join('\n'); }
+        tableBody.push([ `${krit.label}\n${krit.slogan}`, descText, scoreStr ]);
       });
 
-      // Berechne Durchschnitt
       const scores = Object.values(p.ratings).filter(v => v !== null);
       const avg = scores.length ? (scores.reduce((a,b)=>a+b, 0) / scores.length).toFixed(2) : '—';
 
-      // 1. Tabelle links zeichnen (Breite = 110mm, geht von X=20 bis X=130)
       doc.autoTable({
         startY: 80,
         head: [['Dimension', 'Kriterien & Beschreibung', 'Bewertung']],
-        body: tableBody,
-        theme: 'grid',
+        body: tableBody, theme: 'grid',
         styles: { fontSize: 7, cellPadding: 2.2, lineColor: [180, 180, 180], lineWidth: 0.2, textColor: [0, 0, 0] },
         headStyles: { fillColor: [240, 240, 240], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: 7.5, lineColor: [180, 180, 180] },
-        columnStyles: {
-          0: { fontStyle: 'bold', cellWidth: 42 },
-          1: { cellWidth: 50 },
-          2: { fontStyle: 'bold', halign: 'center', cellWidth: 18 }
-        },
+        columnStyles: { 0: { fontStyle: 'bold', cellWidth: 42 }, 1: { cellWidth: 50 }, 2: { fontStyle: 'bold', halign: 'center', cellWidth: 18 } },
         margin: { left: margin }
       });
-
       const tableEndY = doc.lastAutoTable.finalY;
 
-      // 2. Vektor-Radar-Diagramm rechts zeichnen (Mitte = (165, 105), Radius = 20mm)
-      const cx = 165;
-      const cy = 106;
-      const maxR = 21; // 21mm Radius entspricht Note 4
-
-      // A. Zeichne konzentrische 5-Eck-Ringe (für Note 2, 3, 4)
-      doc.setDrawColor(210, 210, 210);
-      doc.setLineWidth(0.15);
+      const cx = 165; const cy = 106; const maxR = 21;
+      doc.setDrawColor(210, 210, 210); doc.setLineWidth(0.15);
       for (let ring = 1; ring <= 3; ring++) {
-        const ringR = maxR * (ring / 3);
-        const ringPts = [];
-        for (let i = 0; i < 5; i++) {
-          const ang = (Math.PI * 2 * i / 5) - Math.PI / 2;
-          ringPts.push({ x: cx + ringR * Math.cos(ang), y: cy + ringR * Math.sin(ang) });
-        }
-        for (let i = 0; i < 5; i++) {
-          const next = (i + 1) % 5;
-          doc.line(ringPts[i].x, ringPts[i].y, ringPts[next].x, ringPts[next].y);
-        }
+        const ringR = maxR * (ring / 3); const ringPts = [];
+        for (let i = 0; i < 5; i++) { const ang = (Math.PI * 2 * i / 5) - Math.PI / 2; ringPts.push({ x: cx + ringR * Math.cos(ang), y: cy + ringR * Math.sin(ang) }); }
+        for (let i = 0; i < 5; i++) { const next = (i + 1) % 5; doc.line(ringPts[i].x, ringPts[i].y, ringPts[next].x, ringPts[next].y); }
       }
-
-      // B. Zeichne Achsenlinien vom Zentrum zu den Ecken
-      doc.setDrawColor(220, 220, 220);
-      doc.setLineWidth(0.1);
-      const outerPts = [];
-      for (let i = 0; i < 5; i++) {
-        const ang = (Math.PI * 2 * i / 5) - Math.PI / 2;
-        const ox = cx + maxR * Math.cos(ang);
-        const oy = cy + maxR * Math.sin(ang);
-        outerPts.push({ x: ox, y: oy });
-        doc.line(cx, cy, ox, oy);
-      }
-
-      // C. Zeichne Beschriftungs-Buchstaben (T, I, P, S, U) an die Spitzen
+      doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.1);
+      for (let i = 0; i < 5; i++) { const ang = (Math.PI * 2 * i / 5) - Math.PI / 2; const ox = cx + maxR * Math.cos(ang); const oy = cy + maxR * Math.sin(ang); doc.line(cx, cy, ox, oy); }
       const labels = ['T', 'I', 'P', 'S', 'U'];
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.setTextColor(0, 0, 0);
-      for (let i = 0; i < 5; i++) {
-        const ang = (Math.PI * 2 * i / 5) - Math.PI / 2;
-        // Schiebe Buchstaben leicht nach außen
-        const lx = cx + (maxR + 4.5) * Math.cos(ang);
-        const ly = cy + (maxR + 3) * Math.sin(ang) + 1; // Leichte Y-Korrektur für die Mitte
-        doc.text(labels[i], lx, ly, { align: 'center' });
-      }
-
-      // D. Zeichne das ausgefüllte IST-Leistungspolygon des Spielers
-      const istScores = [
-        p.ratings.technik || 1,
-        p.ratings.intelligenz || 1,
-        p.ratings.persoenlichkeit || 1,
-        p.ratings.schnelligkeit || 1,
-        p.ratings.umfeld || 1
-      ];
-
-      const getPt = (i, val) => {
-        const ang = (Math.PI * 2 * i / 5) - Math.PI / 2;
-        // Skaliere Note 1-4 auf Radius 0-maxR
-        const valR = maxR * ((val - 1) / 3);
-        return { x: cx + valR * Math.cos(ang), y: cy + valR * Math.sin(ang) };
-      };
-
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(0, 0, 0);
+      for (let i = 0; i < 5; i++) { const ang = (Math.PI * 2 * i / 5) - Math.PI / 2; const lx = cx + (maxR + 4.5) * Math.cos(ang); const ly = cy + (maxR + 3) * Math.sin(ang) + 1; doc.text(labels[i], lx, ly, { align: 'center' }); }
+      const istScores = [ p.ratings.technik || 1, p.ratings.intelligenz || 1, p.ratings.persoenlichkeit || 1, p.ratings.schnelligkeit || 1, p.ratings.umfeld || 1 ];
+      const getPt = (i, val) => { const ang = (Math.PI * 2 * i / 5) - Math.PI / 2; const valR = maxR * ((val - 1) / 3); return { x: cx + valR * Math.cos(ang), y: cy + valR * Math.sin(ang) }; };
       const playerPts = [];
-      for (let i = 0; i < 5; i++) {
-        playerPts.push(getPt(i, istScores[i]));
-      }
+      for (let i = 0; i < 5; i++) { playerPts.push(getPt(i, istScores[i])); }
+      doc.setFillColor(242, 242, 242); doc.setDrawColor(0, 0, 0); doc.setLineWidth(0.4);
+      for (let i = 0; i < 5; i++) { const next = (i + 1) % 5; doc.triangle(cx, cy, playerPts[i].x, playerPts[i].y, playerPts[next].x, playerPts[next].y, 'FD'); }
 
-      // Zeichne den gefüllten Vektor-Körper via 5 verbundene Dreiecke
-      doc.setFillColor(242, 242, 242);
-      doc.setDrawColor(0, 0, 0);
-      doc.setLineWidth(0.4);
-      for (let i = 0; i < 5; i++) {
-        const next = (i + 1) % 5;
-        doc.triangle(
-          cx, cy,
-          playerPts[i].x, playerPts[i].y,
-          playerPts[next].x, playerPts[next].y,
-          'FD'
-        );
-      }
-
-      // Bestimme den Y-Startwert für den nächsten Block (mindestens das Ende der Tabelle oder des Diagramms)
       const diagramEndY = cy + maxR + 10;
       let nextY = Math.max(tableEndY, diagramEndY) + 6;
-
-      // Durchschnittsbalken
-      doc.setDrawColor(0, 0, 0);
-      doc.setFillColor(245, 245, 245);
-      doc.rect(margin, nextY, PW - margin * 2, 9, 'F');
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(10);
+      doc.setDrawColor(0, 0, 0); doc.setFillColor(245, 245, 245); doc.rect(margin, nextY, PW - margin * 2, 9, 'F');
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(10);
       doc.text(`GESAMTDURCHSCHNITT (Ø):  ${avg}  von  4.00`, margin + 5, nextY + 6);
-
       nextY += 16;
 
-      // --- TRAINER-NOTIZEN ---
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(11);
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(11);
       doc.text('BEACHTUNGEN & TRAINER-NOTIZEN', margin, nextY);
-
       nextY += 3;
-      // Dynamische Höhe berechnen, damit PDF absolut sicher auf 1 Seite bleibt (Footer ist bei PH-12, also max. PH-15)
-      const availableSpace = PH - nextY - 17; 
-      const noteBoxH = Math.max(16, availableSpace); // Mindestens 16mm Höhe
-      
-      doc.setDrawColor(180, 180, 180);
-      doc.rect(margin, nextY, PW - margin * 2, noteBoxH, 'S');
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(8.5); // Leicht kleinere Schriftgröße für Notizen bei Platzmangel
-      
+      const availableSpace = PH - nextY - 17;
+      const noteBoxH = Math.max(16, availableSpace);
+      doc.setDrawColor(180, 180, 180); doc.rect(margin, nextY, PW - margin * 2, noteBoxH, 'S');
+      doc.setFont('Helvetica', 'normal'); doc.setFontSize(8.5);
       if (p.notes) {
-        // Beschneide Text, falls er zu lang für die Box ist
         const splitNotes = doc.splitTextToSize(p.notes, PW - margin * 2 - 8);
-        // Nur so viele Zeilen ausgeben, wie physikalisch in die Box passen (ca. 3.5mm pro Zeile)
         const maxLines = Math.floor((noteBoxH - 6) / 3.5);
         const slicedNotes = splitNotes.slice(0, maxLines);
-        
         doc.text(slicedNotes, margin + 4, nextY + 5.5);
       } else {
         doc.setTextColor(140, 140, 140);
         doc.text('Keine Notizen oder Beobachtungen zu diesem Spieler erfasst.', margin + 4, nextY + 6);
       }
 
-      // Footer branding
-      doc.setFontSize(7.5);
-      doc.setTextColor(140, 140, 140);
+      doc.setFontSize(7.5); doc.setTextColor(140, 140, 140);
       doc.text('TIPS/U LocalAPP  ·  Offline-sicher generiert', PW - margin, PH - 12, { align: 'right' });
     }
 
-    // 🖨️ EINZELNEN SPIELER EXPORTIEREN
     function exportSinglePlayerPDF() {
       const pid = document.getElementById('select-rate-player').value;
       if (!pid) return;
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
-
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-
       drawPlayerPage(doc, p);
-
-      // PDF herunterladen
       doc.save(`TIPSU_Leistungsbericht_${p.name.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`);
       showToast('✓ PDF erfolgreich generiert!');
     }
 
-    // 🖨️ GESAMTES TEAM EXPORTIEREN (ALLE IN EIN PDF)
     function exportAllPlayersPDF() {
-      if (!APP_STATE.players || APP_STATE.players.length === 0) {
-        alert('Dein Kader ist aktuell leer. Es gibt keine Spieler zum Exportieren.');
-        return;
-      }
-
+      if (!APP_STATE.players || APP_STATE.players.length === 0) { alert('Dein Kader ist aktuell leer. Es gibt keine Spieler zum Exportieren.'); return; }
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-
-      // Sortiere Spieler alphabetisch nach Name, wie in der Kaderliste
       const players = [...APP_STATE.players];
       players.sort((a, b) => a.name.localeCompare(b.name));
-
-      players.forEach((p, idx) => {
-        if (idx > 0) {
-          doc.addPage();
-        }
-        drawPlayerPage(doc, p);
-      });
-
-      // PDF herunterladen
+      players.forEach((p, idx) => { if (idx > 0) { doc.addPage(); } drawPlayerPage(doc, p); });
       doc.save(`TIPSU_Gesamtkader_Leistungsberichte.pdf`);
       showToast('✓ PDF für das gesamte Team erfolgreich generiert!');
     }
 
-    // 📤 Export JSON-Datei (Kader sichern)
     function exportKaderJSON() {
-      if (APP_STATE.players.length === 0) {
-        alert('Dein Kader ist aktuell leer. Erstelle erst Spieler, bevor du sie exportierst.');
-        return;
-      }
-      
+      if (APP_STATE.players.length === 0) { alert('Dein Kader ist aktuell leer. Erstelle erst Spieler, bevor du sie exportierst.'); return; }
       const jsonStr = JSON.stringify(APP_STATE, null, 2);
       const blob = new Blob([jsonStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      
       const a = document.createElement('a');
-      a.href = url;
-      a.download = `TIPSU_Kader_Backup_${new Date().toISOString().slice(0, 10)}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      
+      a.href = url; a.download = `TIPSU_Kader_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
       showToast('📤 Backup-Datei erfolgreich heruntergeladen');
     }
 
-    // 📥 Import JSON-Datei (Kader laden)
     function importKaderJSON(event) {
       const file = event.target.files[0];
       if (!file) return;
-      
       const reader = new FileReader();
       reader.onload = function(e) {
         try {
@@ -2687,49 +2392,37 @@ select.inp option {
           if (parsed && Array.isArray(parsed.players)) {
             APP_STATE = parsed;
             if (!APP_STATE.teamName) APP_STATE.teamName = 'Meine Mannschaft';
+            ensureTournamentFields(); // NEU: Wettkampf-Felder garantieren
             saveStateToLocalStorageBackup();
-            
-            // UI aktualisieren
-            renderDashboardStats();
-            renderKaderList();
-            populateRateSelector();
-            
+            renderDashboardStats(); renderKaderList(); populateRateSelector();
+            renderTeams(); renderRanking(); renderArchive(); // NEU: Wettkampf-Ansichten aktualisieren
             showToast('✓ Kader erfolgreich importiert!');
-            
-            // Zurück zum Dashboard, um den Erfolg anzuzeigen
             switchTab('dashboard');
-          } else {
-            alert('Ungültiges Dateiformat. Die JSON-Datei muss einen Kader enthalten.');
-          }
-        } catch (err) {
-          alert('Fehler beim Einlesen der Datei. Bitte überprüfe die Datei.');
-        }
+          } else { alert('Ungültiges Dateiformat. Die JSON-Datei muss einen Kader enthalten.'); }
+        } catch (err) { alert('Fehler beim Einlesen der Datei. Bitte überprüfe die Datei.'); }
       };
       reader.readAsText(file);
-      
-      // Zurücksetzen des Input-Felds
       event.target.value = '';
     }
 
-    // ⚠️ RESET APP
     function resetWholeApp() {
-      if (confirm('Bist du absolut sicher? Alle Spieler, Notizen und TIPS/U-Bewertungen werden unwiderruflich aus deinem Browser-Speicher gelöscht!')) {
+      if (confirm('Bist du absolut sicher? Alle Spieler, Notizen, TIPS/U-Bewertungen und Wettkampf-Daten werden unwiderruflich aus deinem Browser-Speicher gelöscht!')) {
         APP_STATE.players = [];
+        APP_STATE.teams = [];
+        APP_STATE.tapperArchive = [];
+        APP_STATE.sessionArchive = [];
+        if (typeof tkTapper !== 'undefined') { tkTapper.focus = []; tkTapper.finished = false; }
         localStorage.removeItem('tipsu_localapp_backup');
         localStorage.removeItem('prefos_localapp_backup');
-
-        // Auch den IndexedDB-Speicher leeren (sonst kommen die Daten beim Neuladen zurück)
         clearIndexedDB().then(() => {
-          renderDashboardStats();
-          renderKaderList();
-          populateRateSelector();
+          renderDashboardStats(); renderKaderList(); populateRateSelector();
+          renderTeams(); renderRanking(); renderArchive();
           showToast('⚠️ App wurde vollständig zurückgesetzt');
           switchTab('dashboard');
         });
       }
     }
 
-    // 🧹 IndexedDB-Store komplett leeren
     function clearIndexedDB() {
       if (!dbInstance) return Promise.resolve(false);
       return new Promise((resolve) => {
@@ -2739,40 +2432,30 @@ select.inp option {
           const request = store.clear();
           request.onsuccess = () => resolve(true);
           request.onerror = () => resolve(false);
-        } catch (e) {
-          console.error('IndexedDB Fehler beim Leeren:', e);
-          resolve(false);
-        }
+        } catch (e) { console.error('IndexedDB Fehler beim Leeren:', e); resolve(false); }
       });
     }
 
-    // 📋 ZUSATZFUNKTIONEN FÜR AKKORDEONS & CHECKS
+    // 📋 VERHALTENS-AKKORDEONS & CHECKS
     function toggleBehaviorChecklist(btn, dim) {
       const checklist = document.getElementById(`checklist-${dim}`);
       const isVisible = checklist.style.display === 'block';
       checklist.style.display = isVisible ? 'none' : 'block';
-      
       const svg = btn.querySelector('svg');
       btn.querySelector('span').textContent = isVisible ? 'Verhalten einblenden' : 'Verhalten ausblenden';
-      if (svg) {
-        svg.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
-      }
+      if (svg) { svg.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)'; }
     }
 
     function renderBehaviorChecklists(player) {
       const dims = ['technik', 'intelligenz', 'persoenlichkeit', 'schnelligkeit', 'umfeld'];
-      
       dims.forEach(dim => {
         const container = document.getElementById(`checklist-${dim}`);
         if (!container) return;
-        
         container.innerHTML = '';
         const data = BEURTEILUNG_KRITERIEN[dim];
         if (!data) return;
-        
         data.behaviors.forEach((beh, idx) => {
           const isChecked = player.behaviorChecklist && player.behaviorChecklist[`${dim}_${idx}`] === true;
-          
           const item = document.createElement('label');
           item.className = 'behavior-item';
           item.innerHTML = `
@@ -2789,46 +2472,647 @@ select.inp option {
       if (!pid) return;
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
-      
       if (!p.behaviorChecklist) p.behaviorChecklist = {};
       p.behaviorChecklist[`${dim}_${index}`] = checked;
       saveStateToLocalStorageBackup();
     }
 
-    // 🏆 DASHBOARD QUICK-PRINT FUNKTION
     function triggerDashPlayerPDF() {
       const pid = document.getElementById('dash-print-player').value;
-      if (!pid) {
-        alert('Bitte wähle zuerst einen Spieler aus.');
-        return;
-      }
-      
+      if (!pid) { alert('Bitte wähle zuerst einen Spieler aus.'); return; }
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
-      
-      // Temporär den Spieler im globalen Bewertungsselektor auswählen und drucken
       const oldRateVal = document.getElementById('select-rate-player').value;
       document.getElementById('select-rate-player').value = pid;
       loadPlayerRating();
-      
-      // Druck starten
       exportSinglePlayerPDF();
-      
-      // Zustand wiederherstellen
       document.getElementById('select-rate-player').value = oldRateVal;
-      if (oldRateVal) {
-        loadPlayerRating();
-      } else {
-        document.getElementById('rating-editor-card').style.display = 'none';
-      }
+      if (oldRateVal) { loadPlayerRating(); } else { document.getElementById('rating-editor-card').style.display = 'none'; }
     }
 
-    // 🚀 INITIALISIERUNG BEIM START
+    /* ===================================================================
+       TEIL D — WETTKAMPF-MODUL (Turnier · Ranking · Action-Tapper · Archiv)
+       Teilt sich den Scope mit dem Haupt-Skript: nutzt APP_STATE,
+       saveStateToLocalStorageBackup() und showToast() direkt (keine IIFE).
+    =================================================================== */
+
+    // — Kleine Helfer (kollidieren nicht mit dem Haupt-App-Code) —
+    const $ = (sel, root) => (root || document).querySelector(sel);
+    function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function tkUid(prefix){ return (prefix || 't_') + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+    function playerById(id){ return APP_STATE.players.find(p => p.id === id) || null; }
+    function teamById(id){ return APP_STATE.teams.find(t => t.id === id) || null; }
+    function teamOfPlayer(pid){ return APP_STATE.teams.find(t => Array.isArray(t.playerIds) && t.playerIds.includes(pid)) || null; }
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function fmt(sec){ sec = Math.max(0, sec | 0); return pad(Math.floor(sec / 60)) + ':' + pad(sec % 60); }
+    function hm(ts){ const d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+    function dayKey(ts){ const d = new Date(ts); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+    function dayLabel(key){
+      const parts = key.split('-').map(Number);
+      const d = new Date(parts[0], parts[1] - 1, parts[2]);
+      return d.toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+    }
+    function primaryColor(){ return (getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()) || '#e27d38'; }
+
+    // — Team-Farben / Leibchen-Palette für den Picker —
+    const CLUBS = [
+      { name: 'Rot', color: '#ef4444' }, { name: 'Blau', color: '#3b82f6' },
+      { name: 'Grün', color: '#22c55e' }, { name: 'Gelb', color: '#eab308' },
+      { name: 'Orange', color: '#f97316' }, { name: 'Türkis', color: '#14b8a6' },
+      { name: 'Pink', color: '#ec4899' }, { name: 'Lila', color: '#a855f7' },
+      { name: 'Hellblau', color: '#38bdf8' }, { name: 'Weiss', color: '#e5e7eb' },
+      { name: 'Bordeaux', color: '#fb7185' }, { name: 'Grau', color: '#94a3b8' }
+    ];
+
+    // — Tapper-Laufzeitstatus (bewusst NICHT persistiert) —
+    let tkTapper = { minutes: 4, focus: [], counts: {}, running: false, paused: false, finished: false, remaining: 0, interval: null, lastElapsed: 0 };
+
+    /* ---------- Eigener Bestätigungsdialog ---------- */
+    let tkConfirmCb = null;
+    function askConfirm(msg, yesLabel, cb){
+      document.getElementById('tk-confirmMsg').textContent = msg;
+      document.getElementById('tk-confirmYes').textContent = yesLabel || 'OK';
+      tkConfirmCb = cb || null;
+      document.getElementById('tk-confirm').hidden = false;
+    }
+    function closeConfirm(){ document.getElementById('tk-confirm').hidden = true; tkConfirmCb = null; }
+
+    /* ---------- Bottom-Sheet Picker ---------- */
+    function openSheet(title){
+      document.getElementById('tk-sheetTitle').textContent = title;
+      document.getElementById('tk-sheet').hidden = false;
+    }
+    function closeSheet(){
+      const ov = document.getElementById('tk-sheet');
+      ov.hidden = true;
+      ov.removeAttribute('data-mode');
+      ov.removeAttribute('data-team');
+      document.getElementById('tk-sheetBody').innerHTML = '';
+    }
+    function openClubPicker(){
+      const ov = document.getElementById('tk-sheet');
+      ov.dataset.mode = 'club';
+      openSheet('Team / Farbe wählen');
+      let html = '<div class="tk-field"><input type="text" id="tk-customTeam" placeholder="Eigener Team-Name …" maxlength="22"><button class="tk-icon-btn" data-customadd="1" aria-label="Hinzufügen" style="width:50px;">＋</button></div>';
+      html += '<div class="tk-club-grid">';
+      CLUBS.forEach(c => { html += '<button class="tk-club-btn" style="--cc:' + c.color + ';" data-clubname="' + esc(c.name) + '" data-clubcolor="' + c.color + '">' + esc(c.name) + '</button>'; });
+      html += '</div>';
+      document.getElementById('tk-sheetBody').innerHTML = html;
+    }
+    function openAssign(teamId){
+      if (!teamById(teamId)) return;
+      const ov = document.getElementById('tk-sheet');
+      ov.dataset.mode = 'assign'; ov.dataset.team = teamId;
+      openSheet('Spieler zuteilen');
+      renderPickList();
+    }
+    function openFocusPicker(){
+      const ov = document.getElementById('tk-sheet');
+      ov.dataset.mode = 'focus';
+      openSheet('Spieler für Tapper wählen');
+      renderPickList();
+    }
+    function renderPickList(){
+      const ov = document.getElementById('tk-sheet');
+      const mode = ov.dataset.mode;
+      const body = document.getElementById('tk-sheetBody');
+      if (!APP_STATE.players.length){
+        body.innerHTML = '<div class="tk-empty"><span class="big">👥</span>Noch keine Spieler im Kader. Lege sie zuerst im Reiter «Kader» an.</div>';
+        return;
+      }
+      const team = (mode === 'assign') ? teamById(ov.dataset.team) : null;
+      const sorted = APP_STATE.players.slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      body.innerHTML = sorted.map(p => {
+        let sel = false;
+        if (mode === 'assign') sel = !!(team && team.playerIds.includes(p.id));
+        else if (mode === 'focus') sel = tkTapper.focus.includes(p.id);
+        const other = (mode === 'assign' && !sel) ? teamOfPlayer(p.id) : null;
+        const sub = other ? ' <small style="color:var(--text-muted);font-weight:600;">(in ' + esc(other.name) + ')</small>' : '';
+        return '<div class="tk-pick-row ' + (sel ? 'sel' : '') + '" data-pick="' + p.id + '"><span class="name">' + esc(p.name || 'Unbenannt') + sub + '</span><span class="mark">' + (sel ? '✓' : '') + '</span></div>';
+      }).join('');
+    }
+
+    /* ---------- TURNIER ---------- */
+    function addTeamFromClub(name, color){
+      if (APP_STATE.teams.length >= 8){ showToast('Maximal 8 Teams möglich.', true); return; }
+      APP_STATE.teams.push({ id: tkUid('t_'), name: name || ('Team ' + (APP_STATE.teams.length + 1)), color: color || primaryColor(), playerIds: [], sessionPoints: 0 });
+      saveStateToLocalStorageBackup();
+      closeSheet();
+      renderTeams();
+      showToast('✓ Team hinzugefügt');
+    }
+    function removeTeam(teamId){
+      const t = teamById(teamId); if (!t) return;
+      askConfirm('Team «' + t.name + '» wirklich entfernen?', 'Entfernen', () => {
+        APP_STATE.teams = APP_STATE.teams.filter(x => x.id !== teamId);
+        saveStateToLocalStorageBackup();
+        renderTeams();
+        showToast('Team entfernt');
+      });
+    }
+    function changeScore(teamId, delta){
+      const t = teamById(teamId); if (!t) return;
+      t.sessionPoints = Math.max(0, (t.sessionPoints || 0) + delta);
+      saveStateToLocalStorageBackup();
+      const val = document.querySelector('.tk-team-card[data-team="' + teamId + '"] .tk-score-val');
+      if (val) val.textContent = t.sessionPoints;
+    }
+    function togglePlayerInTeam(teamId, pid){
+      const t = teamById(teamId); if (!t) return;
+      const idx = t.playerIds.indexOf(pid);
+      if (idx >= 0){ t.playerIds.splice(idx, 1); }
+      else {
+        APP_STATE.teams.forEach(o => { const i = o.playerIds.indexOf(pid); if (i >= 0) o.playerIds.splice(i, 1); });
+        t.playerIds.push(pid);
+      }
+      saveStateToLocalStorageBackup();
+      renderTeams();
+      const ov = document.getElementById('tk-sheet');
+      if (!ov.hidden && ov.dataset.mode === 'assign') renderPickList();
+    }
+    function unassignPlayer(teamId, pid){
+      const t = teamById(teamId); if (!t) return;
+      t.playerIds = t.playerIds.filter(x => x !== pid);
+      saveStateToLocalStorageBackup();
+      renderTeams();
+    }
+    function endSession(){
+      if (!APP_STATE.teams.length){ showToast('Keine Teams vorhanden.', true); return; }
+      if (!APP_STATE.teams.some(t => (t.sessionPoints || 0) > 0)){ showToast('Noch keine Punkte vergeben.', true); return; }
+      askConfirm('Session beenden? Die Punkte jedes Teams werden allen zugeteilten Spielern aufs Quartal gutgeschrieben und die Turnier-Tafel anschliessend geleert.', 'Beenden', () => {
+        const entry = { id: tkUid('s_'), date: Date.now(), teams: [] };
+        APP_STATE.teams.forEach(t => {
+          const names = [];
+          t.playerIds.forEach(pid => {
+            const p = playerById(pid);
+            if (p){ p.quarterPoints = (p.quarterPoints || 0) + (t.sessionPoints || 0); names.push(p.name || 'Unbenannt'); }
+          });
+          entry.teams.push({ name: t.name, color: t.color, points: t.sessionPoints || 0, players: names });
+        });
+        APP_STATE.sessionArchive.push(entry);
+        APP_STATE.teams = [];
+        pruneArchive();
+        saveStateToLocalStorageBackup();
+        renderTeams(); renderRanking(); renderArchive();
+        showToast('✓ Punkte verteilt & archiviert');
+      });
+    }
+    function renderTeams(){
+      const area = document.getElementById('tk-teamArea');
+      if (!area) return;
+      if (!APP_STATE.teams.length){
+        area.innerHTML = '<div class="tk-empty"><span class="big">🏆</span>Noch keine Teams. Füge unten Teams hinzu und teile ihnen Spieler aus deinem Kader zu.</div>';
+        return;
+      }
+      area.innerHTML = APP_STATE.teams.map(t => {
+        const chips = (t.playerIds || []).map(pid => {
+          const p = playerById(pid);
+          const nm = p ? (p.name || 'Unbenannt') : '— entfernt —';
+          return '<button class="tk-chip" data-unassign="' + t.id + '" data-pid="' + pid + '">' + esc(nm) + ' ✕</button>';
+        }).join('');
+        return '' +
+        '<div class="tk-team-card" data-team="' + t.id + '" style="--tc:' + (t.color || primaryColor()) + ';">' +
+          '<div class="tk-team-top">' +
+            '<div class="tk-team-name">' + esc(t.name) + '</div>' +
+            '<button class="tk-icon-btn danger" data-rmteam="' + t.id + '" aria-label="Team entfernen">🗑</button>' +
+          '</div>' +
+          '<div class="tk-team-players">' + chips +
+            '<button class="tk-chip add" data-assign="' + t.id + '">＋ Spieler</button>' +
+          '</div>' +
+          '<div class="tk-score-row">' +
+            '<button class="tk-score-btn minus" data-dec="' + t.id + '">−</button>' +
+            '<div class="tk-score-val">' + (t.sessionPoints || 0) + '</div>' +
+            '<button class="tk-score-btn plus" data-inc="' + t.id + '">＋</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    /* ---------- RANKING ---------- */
+    function renderRanking(){
+      const area = document.getElementById('tk-rankArea');
+      if (!area) return;
+      const players = APP_STATE.players.filter(Boolean);
+      if (!players.length){
+        area.innerHTML = '<div class="tk-empty"><span class="big">📊</span>Noch keine Spieler im Kader.</div>';
+        return;
+      }
+      const sorted = players.slice().sort((a, b) => (b.quarterPoints || 0) - (a.quarterPoints || 0) || (a.name || '').localeCompare(b.name || ''));
+      const medals = ['🥇', '🥈', '🥉'];
+      area.innerHTML = sorted.map((p, i) => {
+        const rc = i < 3 ? ('r' + (i + 1)) : '';
+        const pos = i < 3 ? medals[i] : (i + 1);
+        return '' +
+        '<div class="tk-rank-row ' + rc + '">' +
+          '<div class="tk-rank-pos">' + pos + '</div>' +
+          '<div class="tk-rank-name">' + esc(p.name || 'Unbenannt') + '</div>' +
+          '<div class="tk-rank-pts">' + (p.quarterPoints || 0) + '</div>' +
+        '</div>';
+      }).join('');
+    }
+    function resetQuarter(){
+      askConfirm('Quartals-Ranking wirklich auf 0 zurücksetzen? Die Spieler-Stammdaten und Bewertungen bleiben vollständig erhalten.', 'Zurücksetzen', () => {
+        APP_STATE.players.forEach(p => p.quarterPoints = 0);
+        saveStateToLocalStorageBackup();
+        renderRanking();
+        showToast('Quartal zurückgesetzt');
+      });
+    }
+
+    /* ---------- ACTION-TAPPER ---------- */
+    function setMinutes(delta){
+      if (tkTapper.running) return;
+      tkTapper.minutes = Math.min(12, Math.max(1, tkTapper.minutes + delta));
+      const mv = document.getElementById('tk-minVal'); if (mv) mv.textContent = tkTapper.minutes;
+      updateTimerDisplay(tkTapper.minutes * 60, 'idle');
+    }
+    function updateTimerDisplay(sec, mode){
+      const d = document.getElementById('tk-timerDisplay');
+      if (!d) return;
+      d.textContent = fmt(sec);
+      d.classList.remove('run', 'paused', 'done');
+      if (mode === 'run') d.classList.add('run');
+      else if (mode === 'paused') d.classList.add('paused');
+      else if (mode === 'done') d.classList.add('done');
+    }
+    function tapperPlayers(){
+      const ids = (tkTapper.focus && tkTapper.focus.length) ? tkTapper.focus : APP_STATE.players.map(p => p.id);
+      return ids.map(id => playerById(id)).filter(Boolean);
+    }
+    function renderTapControls(){
+      const row = document.getElementById('tk-tapControls');
+      if (!row) return;
+      let html = '';
+      if (tkTapper.finished){
+        html = '<button class="tk-btn tk-btn--accent" data-act="reset" style="grid-column:1/-1;margin-bottom:0;">🔄 Neue Runde</button>';
+      } else if (!tkTapper.running){
+        html = '<button class="tk-btn tk-btn--ghost" data-act="focus" style="margin-bottom:0;">👥 Spieler</button>' +
+               '<button class="tk-btn tk-btn--accent" data-act="start" style="margin-bottom:0;">▶ Start</button>';
+      } else if (tkTapper.paused){
+        html = '<button class="tk-btn tk-btn--accent" data-act="resume" style="margin-bottom:0;">▶ Weiter</button>' +
+               '<button class="tk-btn tk-btn--ghost tk-btn--danger" data-act="stop" style="margin-bottom:0;">⏹ Stopp</button>';
+      } else {
+        html = '<button class="tk-btn tk-btn--ghost tk-btn--warn" data-act="pause" style="margin-bottom:0;">⏸ Pause</button>' +
+               '<button class="tk-btn tk-btn--ghost tk-btn--danger" data-act="stop" style="margin-bottom:0;">⏹ Stopp</button>';
+      }
+      row.innerHTML = html;
+    }
+    function renderTapGrid(){
+      const grid = document.getElementById('tk-tapGrid');
+      if (!grid) return;
+      const players = tapperPlayers();
+      if (!players.length){
+        grid.innerHTML = '<div class="tk-empty"><span class="big">⚡</span>Keine Spieler verfügbar. Lege Spieler im «Kader» an oder wähle sie über «Spieler» aus.</div>';
+        return;
+      }
+      const active = tkTapper.running && !tkTapper.paused;
+      const resultClass = tkTapper.finished ? ' result' : '';
+      grid.innerHTML = players.map(p => {
+        const c = tkTapper.counts[p.id] || 0;
+        return '' +
+        '<div class="tk-tap-card' + resultClass + '">' +
+          '<button class="tk-tap-zone" data-tap="' + p.id + '" ' + (active ? '' : 'disabled') + '>' +
+            '<span class="pname">' + esc(p.name || 'Unbenannt') + '</span>' +
+            '<span class="pcount">' + c + '</span>' +
+          '</button>' +
+        '</div>';
+      }).join('');
+    }
+    function startTimer(){
+      const players = tapperPlayers();
+      if (!players.length){ showToast('Keine Spieler verfügbar.', true); return; }
+      tkTapper.counts = {};
+      players.forEach(p => tkTapper.counts[p.id] = 0);
+      tkTapper.remaining = tkTapper.minutes * 60;
+      tkTapper.running = true; tkTapper.paused = false; tkTapper.finished = false;
+      updateTimerDisplay(tkTapper.remaining, 'run');
+      renderTapControls(); renderTapGrid();
+      clearInterval(tkTapper.interval);
+      tkTapper.interval = setInterval(tick, 1000);
+    }
+    function tick(){
+      tkTapper.remaining--;
+      if (tkTapper.remaining <= 0){ tkTapper.remaining = 0; updateTimerDisplay(0, 'done'); finalize(true); return; }
+      updateTimerDisplay(tkTapper.remaining, 'run');
+    }
+    function pauseTimer(){
+      if (!tkTapper.running || tkTapper.paused) return;
+      tkTapper.paused = true; clearInterval(tkTapper.interval);
+      updateTimerDisplay(tkTapper.remaining, 'paused');
+      renderTapControls(); renderTapGrid();
+    }
+    function resumeTimer(){
+      if (!tkTapper.running || !tkTapper.paused) return;
+      tkTapper.paused = false;
+      updateTimerDisplay(tkTapper.remaining, 'run');
+      renderTapControls(); renderTapGrid();
+      clearInterval(tkTapper.interval);
+      tkTapper.interval = setInterval(tick, 1000);
+    }
+    function stopTimer(){
+      if (!tkTapper.running) return;
+      askConfirm('Durchlauf vorzeitig beenden und werten?', 'Beenden', () => finalize(false));
+    }
+    function finalize(natural){
+      clearInterval(tkTapper.interval);
+      const used = tkTapper.minutes * 60 - Math.max(0, tkTapper.remaining);
+      tkTapper.lastElapsed = natural ? tkTapper.minutes * 60 : used;
+      tkTapper.running = false; tkTapper.paused = false; tkTapper.finished = true;
+      const players = tapperPlayers();
+      const run = {
+        id: tkUid('r_'), date: Date.now(), minutes: tkTapper.minutes, durationSec: tkTapper.lastElapsed,
+        results: players.map(p => ({ playerId: p.id, name: p.name || 'Unbenannt', count: tkTapper.counts[p.id] || 0 }))
+      };
+      APP_STATE.tapperArchive.push(run);
+      pruneArchive();
+      saveStateToLocalStorageBackup();
+      updateTimerDisplay(0, 'done');
+      renderTapControls(); renderTapGrid(); renderArchive();
+      showToast('✓ Durchlauf gespeichert');
+    }
+    function tap(pid){
+      if (!tkTapper.running || tkTapper.paused) return;
+      tkTapper.counts[pid] = (tkTapper.counts[pid] || 0) + 1;
+      const span = document.querySelector('[data-tap="' + pid + '"] .pcount');
+      if (span) span.textContent = tkTapper.counts[pid];
+    }
+    function resetTapper(){
+      clearInterval(tkTapper.interval);
+      tkTapper.running = false; tkTapper.paused = false; tkTapper.finished = false;
+      tkTapper.counts = {}; tkTapper.remaining = 0;
+      updateTimerDisplay(tkTapper.minutes * 60, 'idle');
+      renderTapControls(); renderTapGrid();
+    }
+
+    /* ---------- ARCHIV ---------- */
+    let tkArchiveIndex = 0;
+    function archiveDays(){
+      const set = new Set();
+      APP_STATE.tapperArchive.forEach(r => set.add(dayKey(r.date)));
+      APP_STATE.sessionArchive.forEach(s => set.add(dayKey(s.date)));
+      return Array.from(set).sort((a, b) => b.localeCompare(a)); // neueste zuerst
+    }
+    function pruneArchive(){
+      const keepPerDay = (arr) => {
+        const byDay = {};
+        arr.slice().sort((a, b) => b.date - a.date).forEach(item => {
+          const k = dayKey(item.date);
+          (byDay[k] = byDay[k] || []).push(item);
+        });
+        const keep = [];
+        Object.keys(byDay).forEach(k => { keep.push.apply(keep, byDay[k].slice(0, 10)); });
+        keep.sort((a, b) => a.date - b.date);
+        return keep;
+      };
+      APP_STATE.tapperArchive = keepPerDay(APP_STATE.tapperArchive);
+      APP_STATE.sessionArchive = keepPerDay(APP_STATE.sessionArchive);
+    }
+    function renderArchive(){
+      const area = document.getElementById('tk-archArea');
+      if (!area) return;
+      const days = archiveDays();
+      if (!days.length){
+        area.innerHTML = '<div class="tk-empty"><span class="big">🗓️</span>Noch kein Verlauf vorhanden. Beendete Tapper-Durchläufe und Turnier-Sessions erscheinen hier – nach Tag sortiert.</div>';
+        return;
+      }
+      tkArchiveIndex = Math.min(Math.max(0, tkArchiveIndex), days.length - 1);
+      const key = days[tkArchiveIndex];
+      const runs = APP_STATE.tapperArchive.filter(r => dayKey(r.date) === key).sort((a, b) => b.date - a.date);
+      const sessions = APP_STATE.sessionArchive.filter(s => dayKey(s.date) === key).sort((a, b) => b.date - a.date);
+
+      let html = '' +
+        '<div class="tk-day-nav">' +
+          '<button data-day="prev" ' + (tkArchiveIndex >= days.length - 1 ? 'disabled' : '') + ' aria-label="Älterer Tag">‹</button>' +
+          '<div class="lbl">' + esc(dayLabel(key)) + '<small>' + (tkArchiveIndex + 1) + ' / ' + days.length + ' Tage</small></div>' +
+          '<button data-day="next" ' + (tkArchiveIndex <= 0 ? 'disabled' : '') + ' aria-label="Neuerer Tag">›</button>' +
+        '</div>';
+
+      html += '<div class="tk-arch-title">⚡ Action-Tapper</div>';
+      if (!runs.length){
+        html += '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Durchläufe an diesem Tag.</p>';
+      } else {
+        runs.forEach(r => {
+          const body = r.results.slice().sort((a, b) => b.count - a.count)
+            .map(x => '<span class="tk-pill">' + esc(x.name) + ' <b>' + x.count + '</b></span>').join('');
+          html += '<div class="tk-arch-entry">' +
+            '<div class="meta"><span>' + esc(hm(r.date)) + ' Uhr</span><span class="t">' + r.minutes + ' Min · ' + fmt(r.durationSec || 0) + '</span></div>' +
+            '<div class="body">' + (body || '<span class="tk-pill">—</span>') + '</div></div>';
+        });
+      }
+
+      html += '<div class="tk-arch-title">🏆 Turnier-Sessions</div>';
+      if (!sessions.length){
+        html += '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Sessions an diesem Tag.</p>';
+      } else {
+        sessions.forEach(s => {
+          const body = s.teams.slice().sort((a, b) => b.points - a.points)
+            .map(t => '<span class="tk-pill team" style="--tc:' + (t.color || primaryColor()) + ';">' + esc(t.name) + ' <b>' + t.points + '</b></span>').join('');
+          html += '<div class="tk-arch-entry">' +
+            '<div class="meta"><span>' + esc(hm(s.date)) + ' Uhr</span><span class="t">' + s.teams.length + ' Teams</span></div>' +
+            '<div class="body">' + body + '</div></div>';
+        });
+      }
+      area.innerHTML = html;
+    }
+
+    /* ---------- PDF-EXPORTE (Schwarz/Weiss, jsPDF + autoTable) ---------- */
+    function tkPdfHeader(doc, title, dateText){
+      const margin = 14;
+      const PW = doc.internal.pageSize.getWidth();
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(20); doc.setTextColor(0, 0, 0);
+      doc.text(title, margin, 24);
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(10);
+      doc.text(dateText, PW - margin, 24, { align: 'right' });
+      doc.setFont('Helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(140, 140, 140);
+      doc.text('System & Development by Dogus Kaplan  ·  100% Offline-Sicherheit', margin, 29.5);
+      doc.setDrawColor(0, 0, 0); doc.setLineWidth(0.6); doc.line(margin, 32, PW - margin, 32);
+    }
+    function tkPdfFooter(doc){
+      const PH = doc.internal.pageSize.getHeight();
+      const PW = doc.internal.pageSize.getWidth();
+      doc.setFontSize(7.5); doc.setTextColor(140, 140, 140);
+      doc.text('TIPS/U LocalAPP  ·  Offline-sicher generiert', PW - 14, PH - 12, { align: 'right' });
+    }
+    function exportRankingPDF(){
+      const players = APP_STATE.players.filter(Boolean);
+      if (!players.length){ showToast('Kein Ranking vorhanden.', true); return; }
+      const jsPDF = window.jspdf.jsPDF;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      tkPdfHeader(doc, 'TIPS/U · Quartals-Ranking', new Date().toLocaleDateString('de-DE'));
+      const sorted = players.slice().sort((a, b) => (b.quarterPoints || 0) - (a.quarterPoints || 0) || (a.name || '').localeCompare(b.name || ''));
+      doc.autoTable({
+        startY: 40,
+        head: [['Platz', 'Spieler', 'Verein / Team', 'Quartalspunkte']],
+        body: sorted.map((p, i) => [String(i + 1), p.name || 'Unbenannt', p.verein || '—', String(p.quarterPoints || 0)]),
+        theme: 'grid',
+        headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255], fontStyle: 'bold' },
+        bodyStyles: { textColor: [0, 0, 0] },
+        styles: { font: 'Helvetica', fontSize: 10, cellPadding: 2.5 },
+        columnStyles: { 0: { halign: 'center', cellWidth: 18 }, 3: { halign: 'center', cellWidth: 36 } },
+        margin: { left: 14, right: 14 }
+      });
+      tkPdfFooter(doc);
+      doc.save('TIPSU_Quartals_Ranking.pdf');
+      showToast('✓ Ranking-PDF generiert');
+    }
+    function exportArchivePDF(){
+      const days = archiveDays();
+      if (!days.length){ showToast('Kein Verlauf vorhanden.', true); return; }
+      const key = days[Math.min(Math.max(0, tkArchiveIndex), days.length - 1)];
+      const runs = APP_STATE.tapperArchive.filter(r => dayKey(r.date) === key).sort((a, b) => a.date - b.date);
+      const sessions = APP_STATE.sessionArchive.filter(s => dayKey(s.date) === key).sort((a, b) => a.date - b.date);
+      const jsPDF = window.jspdf.jsPDF;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      tkPdfHeader(doc, 'TIPS/U · Verlauf / Archiv', dayLabel(key));
+      let y = 40;
+
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0, 0, 0);
+      doc.text('ACTION-TAPPER', 14, y);
+      if (!runs.length){
+        doc.setFont('Helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(120, 120, 120);
+        doc.text('Keine Durchläufe an diesem Tag.', 14, y + 6); y += 14;
+      } else {
+        runs.forEach(r => {
+          doc.autoTable({
+            startY: y + 3,
+            head: [[hm(r.date) + ' Uhr · ' + r.minutes + ' Min (' + fmt(r.durationSec || 0) + ')', 'Aktionen']],
+            body: r.results.slice().sort((a, b) => b.count - a.count).map(x => [x.name, String(x.count)]),
+            theme: 'grid',
+            headStyles: { fillColor: [40, 40, 40], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9 },
+            bodyStyles: { textColor: [0, 0, 0] },
+            styles: { font: 'Helvetica', fontSize: 9, cellPadding: 2 },
+            columnStyles: { 1: { halign: 'center', cellWidth: 34 } },
+            margin: { left: 14, right: 14 }
+          });
+          y = doc.lastAutoTable.finalY + 4;
+        });
+      }
+
+      if (y > doc.internal.pageSize.getHeight() - 45){ doc.addPage(); y = 24; }
+      doc.setFont('Helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0, 0, 0);
+      doc.text('TURNIER-SESSIONS', 14, y);
+      if (!sessions.length){
+        doc.setFont('Helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(120, 120, 120);
+        doc.text('Keine Sessions an diesem Tag.', 14, y + 6);
+      } else {
+        sessions.forEach(s => {
+          doc.autoTable({
+            startY: y + 3,
+            head: [[hm(s.date) + ' Uhr · ' + s.teams.length + ' Teams', 'Punkte', 'Spieler']],
+            body: s.teams.slice().sort((a, b) => b.points - a.points).map(t => [t.name, String(t.points), (t.players || []).join(', ') || '—']),
+            theme: 'grid',
+            headStyles: { fillColor: [40, 40, 40], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 9 },
+            bodyStyles: { textColor: [0, 0, 0] },
+            styles: { font: 'Helvetica', fontSize: 9, cellPadding: 2 },
+            columnStyles: { 1: { halign: 'center', cellWidth: 22 } },
+            margin: { left: 14, right: 14 }
+          });
+          y = doc.lastAutoTable.finalY + 4;
+        });
+      }
+      tkPdfFooter(doc);
+      doc.save('TIPSU_Verlauf_' + key + '.pdf');
+      showToast('✓ Verlauf-PDF generiert');
+    }
+
+    /* ---------- EVENT-BINDINGS ---------- */
+    function tkBind(){
+      // Turnier
+      document.getElementById('tk-addTeamBtn').addEventListener('click', openClubPicker);
+      document.getElementById('tk-endSessionBtn').addEventListener('click', endSession);
+      document.getElementById('tk-teamArea').addEventListener('click', (e) => {
+        const inc = e.target.closest('[data-inc]'); if (inc){ changeScore(inc.dataset.inc, +1); return; }
+        const dec = e.target.closest('[data-dec]'); if (dec){ changeScore(dec.dataset.dec, -1); return; }
+        const rm = e.target.closest('[data-rmteam]'); if (rm){ removeTeam(rm.dataset.rmteam); return; }
+        const as = e.target.closest('[data-assign]'); if (as){ openAssign(as.dataset.assign); return; }
+        const un = e.target.closest('[data-unassign]'); if (un){ unassignPlayer(un.dataset.unassign, un.dataset.pid); return; }
+      });
+      // Ranking
+      document.getElementById('tk-resetQuarterBtn').addEventListener('click', resetQuarter);
+      document.getElementById('tk-rankPdfBtn').addEventListener('click', exportRankingPDF);
+      // Tapper
+      document.getElementById('tk-minMinus').addEventListener('click', () => setMinutes(-1));
+      document.getElementById('tk-minPlus').addEventListener('click', () => setMinutes(+1));
+      document.getElementById('tk-tapControls').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-act]'); if (!b) return;
+        const a = b.dataset.act;
+        if (a === 'start') startTimer();
+        else if (a === 'pause') pauseTimer();
+        else if (a === 'resume') resumeTimer();
+        else if (a === 'stop') stopTimer();
+        else if (a === 'reset') resetTapper();
+        else if (a === 'focus') openFocusPicker();
+      });
+      document.getElementById('tk-tapGrid').addEventListener('click', (e) => {
+        const z = e.target.closest('[data-tap]'); if (!z || z.disabled) return;
+        tap(z.dataset.tap);
+      });
+      // Archiv
+      document.getElementById('tk-archArea').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-day]'); if (!b || b.disabled) return;
+        if (b.dataset.day === 'prev') tkArchiveIndex++;
+        else if (b.dataset.day === 'next') tkArchiveIndex--;
+        renderArchive();
+      });
+      document.getElementById('tk-archPdfBtn').addEventListener('click', exportArchivePDF);
+      // Sheet
+      document.getElementById('tk-sheetClose').addEventListener('click', closeSheet);
+      document.getElementById('tk-sheet').addEventListener('click', (e) => { if (e.target.id === 'tk-sheet') closeSheet(); });
+      document.getElementById('tk-sheetBody').addEventListener('click', (e) => {
+        const ov = document.getElementById('tk-sheet');
+        const mode = ov.dataset.mode;
+        const club = e.target.closest('[data-clubname]');
+        if (club){ addTeamFromClub(club.dataset.clubname, club.dataset.clubcolor); return; }
+        const cadd = e.target.closest('[data-customadd]');
+        if (cadd){
+          const inp = document.getElementById('tk-customTeam');
+          const v = (inp && inp.value || '').trim();
+          if (!v){ showToast('Bitte einen Namen eingeben.', true); return; }
+          addTeamFromClub(v, primaryColor());
+          return;
+        }
+        const pick = e.target.closest('[data-pick]');
+        if (pick){
+          const pid = pick.dataset.pick;
+          if (mode === 'assign') togglePlayerInTeam(ov.dataset.team, pid);
+          else if (mode === 'focus'){
+            const i = tkTapper.focus.indexOf(pid);
+            if (i >= 0) tkTapper.focus.splice(i, 1); else tkTapper.focus.push(pid);
+            renderPickList(); renderTapGrid();
+          }
+        }
+      });
+      // Bestätigungsdialog
+      document.getElementById('tk-confirmYes').addEventListener('click', () => { const cb = tkConfirmCb; closeConfirm(); if (cb) cb(); });
+      document.getElementById('tk-confirmNo').addEventListener('click', closeConfirm);
+      document.getElementById('tk-confirm').addEventListener('click', (e) => { if (e.target.id === 'tk-confirm') closeConfirm(); });
+    }
+
+    /* ===================================================================
+       INITIALISIERUNG (gemeinsamer Start für Haupt-App + Wettkampf-Modul)
+    =================================================================== */
     window.addEventListener('DOMContentLoaded', async () => {
+      // 1) Zustand laden (IndexedDB + localStorage, inkl. Wettkampf-Migration)
       await loadStateFromLocalStorageBackup();
+
+      // 2) Haupt-App-Ansichten aufbauen
       renderDashboardStats();
       renderKaderList();
       populateRateSelector();
+
+      // 3) Wettkampf-Modul verdrahten und initial rendern
+      tkBind();
+      tkTapper.minutes = 4;
+      const mv = document.getElementById('tk-minVal'); if (mv) mv.textContent = tkTapper.minutes;
+      updateTimerDisplay(tkTapper.minutes * 60, 'idle');
+      renderTeams();
+      renderRanking();
+      renderTapControls();
+      renderTapGrid();
+      renderArchive();
+
+      // 4) Startansicht
+      switchTab('dashboard');
     });
   </script>
 </body>
