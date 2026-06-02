@@ -901,6 +901,11 @@ select.inp option {
 .tipsu-letters { display:inline-flex; gap:3px; }
 .tipsu-dot { width:17px; height:17px; border-radius:5px; font-size:9px; font-weight:900; display:inline-flex; align-items:center; justify-content:center; }
 .rate-row-avg { font-size:12px; font-weight:900; min-width:48px; text-align:right; }
+
+/* ── Archiv: Tag/Woche-Umschalter ── */
+.tk-arch-modeswitch { display:flex; gap:6px; background:rgba(17,24,39,0.8); border:1px solid var(--card-border); border-radius:8px; padding:4px; margin-bottom:12px; }
+.tk-mode-btn { flex:1; background:transparent; border:none; color:var(--text-muted); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; padding:9px 4px; border-radius:6px; cursor:pointer; font-family:inherit; }
+.tk-mode-btn.active { color:var(--primary); background:rgba(226,125,56,0.1); }
 </style>
 </head>
 <body>
@@ -1336,6 +1341,10 @@ select.inp option {
 
       <!-- UNTER-TAB: ARCHIV -->
       <div id="wk-archiv" class="wk-sub">
+        <div class="tk-arch-modeswitch">
+          <button class="tk-mode-btn active" data-archmode="day">Tag</button>
+          <button class="tk-mode-btn" data-archmode="week">Woche (Mo–So)</button>
+        </div>
         <div id="tk-archArea"></div>
         <button class="tk-btn tk-btn--accent" id="tk-archPdfBtn">🖨️ Verlauf dieses Tages als PDF</button>
       </div>
@@ -2487,9 +2496,47 @@ select.inp option {
       showToast('✓ PDF für das gesamte Team erfolgreich generiert!');
     }
 
+    // Baut den Wochen-Verlauf (Mo–So, letzte 4 Wochen) als lesbare Struktur fürs JSON-Backup
+    function buildWeeklyHistory() {
+      const weeks = {};
+      const bucket = (item, kind) => {
+        const mon = startOfWeekMonday(item.date);
+        const wk = dayKey(mon.getTime());
+        if (!weeks[wk]) weeks[wk] = { monday: mon, tapper: [], sessions: [] };
+        if (kind === 'tapper') weeks[wk].tapper.push(item); else weeks[wk].sessions.push(item);
+      };
+      APP_STATE.tapperArchive.forEach(r => bucket(r, 'tapper'));
+      APP_STATE.sessionArchive.forEach(s => bucket(s, 'session'));
+      return Object.keys(weeks).sort((a, b) => b.localeCompare(a)).map(wk => {
+        const w = weeks[wk];
+        const map = {};
+        const ensure = (n) => { n = n || 'Unbenannt'; if (!map[n]) map[n] = { spieler: n, tapper_aktionen: 0, turnier_punkte: 0 }; return map[n]; };
+        w.tapper.forEach(r => (r.results || []).forEach(x => { ensure(x.name).tapper_aktionen += (x.count || 0); }));
+        w.sessions.forEach(s => (s.teams || []).forEach(t => (t.players || []).forEach(nm => { ensure(nm).turnier_punkte += (t.points || 0); })));
+        const wertung = Object.keys(map).map(k => { const e = map[k]; return { spieler: e.spieler, tapper_aktionen: e.tapper_aktionen, turnier_punkte: e.turnier_punkte, gesamt: e.tapper_aktionen + e.turnier_punkte }; })
+          .sort((a, b) => b.gesamt - a.gesamt || a.spieler.localeCompare(b.spieler));
+        return {
+          woche_start_montag: wk,
+          zeitraum: weekRangeLabel(w.monday),
+          tapper_durchlaeufe: w.tapper.slice().sort((a, b) => a.date - b.date).map(r => ({
+            zeit: new Date(r.date).toISOString(), minuten: r.minutes, dauer_sekunden: r.durationSec || 0, ergebnisse: r.results
+          })),
+          turnier_sessions: w.sessions.slice().sort((a, b) => a.date - b.date).map(s => ({
+            zeit: new Date(s.date).toISOString(), teams: s.teams
+          })),
+          trainingsmeister_wochenwertung: wertung
+        };
+      });
+    }
+
     function exportKaderJSON() {
       if (APP_STATE.players.length === 0) { alert('Dein Kader ist aktuell leer. Erstelle erst Spieler, bevor du sie exportierst.'); return; }
-      const jsonStr = JSON.stringify(APP_STATE, null, 2);
+      pruneArchive(); // nur die letzten 4 Wochen mitnehmen
+      const exportObj = Object.assign({}, APP_STATE, {
+        exportiert_am: new Date().toISOString(),
+        wettkampf_verlauf_wochen: buildWeeklyHistory()
+      });
+      const jsonStr = JSON.stringify(exportObj, null, 2);
       const blob = new Blob([jsonStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -2506,13 +2553,16 @@ select.inp option {
         try {
           const parsed = JSON.parse(e.target.result);
           if (parsed && Array.isArray(parsed.players)) {
+            delete parsed.wettkampf_verlauf_wochen; // abgeleitetes Feld – wird beim Export neu erzeugt
+            delete parsed.exportiert_am;
             APP_STATE = parsed;
             if (!APP_STATE.teamName) APP_STATE.teamName = 'Meine Mannschaft';
             ensureTournamentFields(); // NEU: Wettkampf-Felder garantieren
+            pruneArchive();           // nur letzte 4 Wochen behalten
             saveStateToLocalStorageBackup();
             renderDashboardStats(); renderKaderList(); populateRateSelector();
             renderTeams(); renderRanking(); renderArchive(); // NEU: Wettkampf-Ansichten aktualisieren
-            showToast('✓ Kader erfolgreich importiert!');
+            showToast('✓ Kader & Wettkampf-Verlauf importiert!');
             switchTab('dashboard');
           } else { alert('Ungültiges Dateiformat. Die JSON-Datei muss einen Kader enthalten.'); }
         } catch (err) { alert('Fehler beim Einlesen der Datei. Bitte überprüfe die Datei.'); }
@@ -2961,14 +3011,43 @@ select.inp option {
     }
 
     /* ---------- ARCHIV ---------- */
-    let tkArchiveIndex = 0;
+    let tkArchiveIndex = 0;   // Tages-Index
+    let tkWeekIndex = 0;      // Wochen-Index
+    let tkArchMode = 'day';   // 'day' | 'week'
+
+    function startOfWeekMonday(ts){
+      const x = new Date(ts); x.setHours(0, 0, 0, 0);
+      const day = (x.getDay() + 6) % 7; // 0 = Montag … 6 = Sonntag
+      x.setDate(x.getDate() - day);
+      return x;
+    }
+    function weekKey(ts){ return dayKey(startOfWeekMonday(ts).getTime()); }
+    function weekRangeLabel(mondayDate){
+      const sun = new Date(mondayDate); sun.setDate(sun.getDate() + 6);
+      const f = (d) => pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.';
+      return f(mondayDate) + ' – ' + f(sun) + sun.getFullYear();
+    }
+    // Stichtag: Montag der Woche vor 4 Wochen (aktuelle Woche + 3 zurück)
+    function fourWeekCutoff(){
+      const mon = startOfWeekMonday(Date.now());
+      mon.setDate(mon.getDate() - 21);
+      return mon.getTime();
+    }
     function archiveDays(){
       const set = new Set();
       APP_STATE.tapperArchive.forEach(r => set.add(dayKey(r.date)));
       APP_STATE.sessionArchive.forEach(s => set.add(dayKey(s.date)));
       return Array.from(set).sort((a, b) => b.localeCompare(a)); // neueste zuerst
     }
+    function archiveWeeks(){
+      const set = new Set();
+      APP_STATE.tapperArchive.forEach(r => set.add(weekKey(r.date)));
+      APP_STATE.sessionArchive.forEach(s => set.add(weekKey(s.date)));
+      return Array.from(set).sort((a, b) => b.localeCompare(a)); // neueste Woche zuerst
+    }
     function pruneArchive(){
+      const cutoff = fourWeekCutoff();
+      const within = (arr) => arr.filter(it => it.date >= cutoff); // nur letzte 4 Wochen behalten
       const keepPerDay = (arr) => {
         const byDay = {};
         arr.slice().sort((a, b) => b.date - a.date).forEach(item => {
@@ -2980,12 +3059,30 @@ select.inp option {
         keep.sort((a, b) => a.date - b.date);
         return keep;
       };
-      APP_STATE.tapperArchive = keepPerDay(APP_STATE.tapperArchive);
-      APP_STATE.sessionArchive = keepPerDay(APP_STATE.sessionArchive);
+      APP_STATE.tapperArchive = keepPerDay(within(APP_STATE.tapperArchive));
+      APP_STATE.sessionArchive = keepPerDay(within(APP_STATE.sessionArchive));
+    }
+
+    // Wiederverwendbare Bausteine (Tages- & Wochenansicht)
+    function tapperEntryHTML(r){
+      const body = r.results.slice().sort((a, b) => b.count - a.count)
+        .map(x => '<span class="tk-pill">' + esc(x.name) + ' <b>' + x.count + '</b></span>').join('');
+      return '<div class="tk-arch-entry">' +
+        '<div class="meta"><span>' + esc(hm(r.date)) + ' Uhr</span><span class="t">' + r.minutes + ' Min · ' + fmt(r.durationSec || 0) + '</span></div>' +
+        '<div class="body">' + (body || '<span class="tk-pill">—</span>') + '</div></div>';
+    }
+    function sessionEntryHTML(s){
+      const body = s.teams.slice().sort((a, b) => b.points - a.points)
+        .map(t => '<span class="tk-pill team" style="--tc:' + (t.color || primaryColor()) + ';">' + esc(t.name) + ' <b>' + t.points + '</b></span>').join('');
+      return '<div class="tk-arch-entry">' +
+        '<div class="meta"><span>' + esc(hm(s.date)) + ' Uhr</span><span class="t">' + s.teams.length + ' Teams</span></div>' +
+        '<div class="body">' + body + '</div></div>';
     }
     function renderArchive(){
       const area = document.getElementById('tk-archArea');
       if (!area) return;
+      if (tkArchMode === 'week') { renderArchiveWeek(area); return; }
+
       const days = archiveDays();
       if (!days.length){
         area.innerHTML = '<div class="tk-empty"><span class="big">🗓️</span>Noch kein Verlauf vorhanden. Beendete Tapper-Durchläufe und Turnier-Sessions erscheinen hier – nach Tag sortiert.</div>';
@@ -3004,29 +3101,71 @@ select.inp option {
         '</div>';
 
       html += '<div class="tk-arch-title">⚡ Action-Tapper</div>';
-      if (!runs.length){
-        html += '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Durchläufe an diesem Tag.</p>';
-      } else {
-        runs.forEach(r => {
-          const body = r.results.slice().sort((a, b) => b.count - a.count)
-            .map(x => '<span class="tk-pill">' + esc(x.name) + ' <b>' + x.count + '</b></span>').join('');
-          html += '<div class="tk-arch-entry">' +
-            '<div class="meta"><span>' + esc(hm(r.date)) + ' Uhr</span><span class="t">' + r.minutes + ' Min · ' + fmt(r.durationSec || 0) + '</span></div>' +
-            '<div class="body">' + (body || '<span class="tk-pill">—</span>') + '</div></div>';
-        });
+      html += runs.length ? runs.map(tapperEntryHTML).join('') : '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Durchläufe an diesem Tag.</p>';
+      html += '<div class="tk-arch-title">🏆 Turnier-Sessions</div>';
+      html += sessions.length ? sessions.map(sessionEntryHTML).join('') : '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Sessions an diesem Tag.</p>';
+      area.innerHTML = html;
+    }
+
+    function renderArchiveWeek(area){
+      const weeks = archiveWeeks();
+      if (!weeks.length){
+        area.innerHTML = '<div class="tk-empty"><span class="big">🗓️</span>Noch kein Verlauf vorhanden. Beendete Tapper-Durchläufe und Turnier-Sessions erscheinen hier – nach Woche (Mo–So) sortiert.</div>';
+        return;
+      }
+      tkWeekIndex = Math.min(Math.max(0, tkWeekIndex), weeks.length - 1);
+      const wk = weeks[tkWeekIndex];
+      const monday = startOfWeekMonday(new Date(wk + 'T00:00:00').getTime());
+      const inWeek = (ts) => weekKey(ts) === wk;
+      const runs = APP_STATE.tapperArchive.filter(r => inWeek(r.date));
+      const sessions = APP_STATE.sessionArchive.filter(s => inWeek(s.date));
+
+      let html = '' +
+        '<div class="tk-day-nav">' +
+          '<button data-week="prev" ' + (tkWeekIndex >= weeks.length - 1 ? 'disabled' : '') + ' aria-label="Frühere Woche">‹</button>' +
+          '<div class="lbl">KW · ' + esc(weekRangeLabel(monday)) + '<small>' + (tkWeekIndex + 1) + ' / ' + weeks.length + ' Wochen</small></div>' +
+          '<button data-week="next" ' + (tkWeekIndex <= 0 ? 'disabled' : '') + ' aria-label="Spätere Woche">›</button>' +
+        '</div>';
+
+      const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+      let any = false;
+      for (let i = 0; i < 7; i++){
+        const d = new Date(monday); d.setDate(d.getDate() + i);
+        const dk = dayKey(d.getTime());
+        const dayRuns = runs.filter(r => dayKey(r.date) === dk).sort((a, b) => b.date - a.date);
+        const daySess = sessions.filter(s => dayKey(s.date) === dk).sort((a, b) => b.date - a.date);
+        if (!dayRuns.length && !daySess.length) continue;
+        any = true;
+        html += '<div class="tk-arch-title" style="color:var(--primary);">' + dayNames[i] + ' · ' + pad(d.getDate()) + '.' + pad(d.getMonth() + 1) + '.</div>';
+        html += dayRuns.map(tapperEntryHTML).join('');
+        html += daySess.map(sessionEntryHTML).join('');
+      }
+      if (!any){
+        html += '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Einträge in dieser Woche.</p>';
       }
 
-      html += '<div class="tk-arch-title">🏆 Turnier-Sessions</div>';
-      if (!sessions.length){
-        html += '<p style="color:var(--text-muted);font-size:12px;margin:0 2px 10px;">Keine Sessions an diesem Tag.</p>';
-      } else {
-        sessions.forEach(s => {
-          const body = s.teams.slice().sort((a, b) => b.points - a.points)
-            .map(t => '<span class="tk-pill team" style="--tc:' + (t.color || primaryColor()) + ';">' + esc(t.name) + ' <b>' + t.points + '</b></span>').join('');
-          html += '<div class="tk-arch-entry">' +
-            '<div class="meta"><span>' + esc(hm(s.date)) + ' Uhr</span><span class="t">' + s.teams.length + ' Teams</span></div>' +
-            '<div class="body">' + body + '</div></div>';
-        });
+      // Trainingsmeister der Woche (Tapper-Aktionen + Turnier-Punkte zusammengerechnet)
+      const map = {};
+      const ensure = (n) => { n = n || 'Unbenannt'; if (!map[n]) map[n] = { name: n, taps: 0, pts: 0 }; return map[n]; };
+      runs.forEach(r => (r.results || []).forEach(x => { ensure(x.name).taps += (x.count || 0); }));
+      sessions.forEach(s => (s.teams || []).forEach(t => (t.players || []).forEach(nm => { ensure(nm).pts += (t.points || 0); })));
+      const agg = Object.keys(map).map(k => { const e = map[k]; e.total = e.taps + e.pts; return e; })
+        .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
+      if (agg.length){
+        html += '<div class="tk-arch-title">🏅 Trainingsmeister der Woche</div>';
+        const medals = ['🥇', '🥈', '🥉'];
+        html += agg.map((e, i) => {
+          const rc = i < 3 ? (' r' + (i + 1)) : '';
+          const pos = i < 3 ? medals[i] : (i + 1);
+          return '<div class="tk-rank-row' + rc + '" style="margin-bottom:8px;">' +
+            '<div class="tk-rank-pos">' + pos + '</div>' +
+            '<div style="flex:1; min-width:0;">' +
+              '<div style="font-weight:700; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + esc(e.name) + '</div>' +
+              '<div style="font-size:10px; color:var(--text-muted); font-weight:600;">' + e.taps + ' Aktionen · ' + e.pts + ' Turnierpkt.</div>' +
+            '</div>' +
+            '<div class="tk-rank-pts">' + e.total + '</div>' +
+          '</div>';
+        }).join('');
       }
       area.innerHTML = html;
     }
@@ -3215,10 +3354,26 @@ select.inp option {
       });
       // Archiv
       document.getElementById('tk-archArea').addEventListener('click', (e) => {
-        const b = e.target.closest('[data-day]'); if (!b || b.disabled) return;
-        if (b.dataset.day === 'prev') tkArchiveIndex++;
-        else if (b.dataset.day === 'next') tkArchiveIndex--;
-        renderArchive();
+        const day = e.target.closest('[data-day]');
+        if (day && !day.disabled) {
+          if (day.dataset.day === 'prev') tkArchiveIndex++;
+          else if (day.dataset.day === 'next') tkArchiveIndex--;
+          renderArchive(); return;
+        }
+        const week = e.target.closest('[data-week]');
+        if (week && !week.disabled) {
+          if (week.dataset.week === 'prev') tkWeekIndex++;
+          else if (week.dataset.week === 'next') tkWeekIndex--;
+          renderArchive(); return;
+        }
+      });
+      // Archiv: Umschalter Tag / Woche
+      document.querySelectorAll('#wk-archiv [data-archmode]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          tkArchMode = btn.dataset.archmode;
+          document.querySelectorAll('#wk-archiv [data-archmode]').forEach(x => x.classList.toggle('active', x === btn));
+          renderArchive();
+        });
       });
       document.getElementById('tk-archPdfBtn').addEventListener('click', exportArchivePDF);
       // Sheet
@@ -3260,6 +3415,13 @@ select.inp option {
     window.addEventListener('DOMContentLoaded', async () => {
       // 1) Zustand laden (IndexedDB + localStorage, inkl. Wettkampf-Migration)
       await loadStateFromLocalStorageBackup();
+
+      // Aufbewahrung: nur letzte 4 Wochen behalten (persistieren, falls etwas entfernt wurde)
+      const beforeLen = APP_STATE.tapperArchive.length + APP_STATE.sessionArchive.length;
+      pruneArchive();
+      if (APP_STATE.tapperArchive.length + APP_STATE.sessionArchive.length !== beforeLen) {
+        saveStateToLocalStorageBackup();
+      }
 
       // 2) Haupt-App-Ansichten aufbauen
       renderDashboardStats();
