@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <meta name="theme-color" content="#0d1520"/>
-<title>TIPS/U LocalAPP</title>
+<title>PrefOS</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <style>
@@ -889,6 +889,18 @@ select.inp option {
 .tk-modal-overlay[hidden] { display:none; }
 .tk-modal { width:100%; max-width:380px; background: var(--card-bg); border:1px solid var(--card-border); border-radius:18px; padding:20px; }
 .tk-modal p { font-size:14px; line-height:1.5; margin-bottom:18px; white-space:pre-line; }
+
+/* ── Bewertung: immer sichtbare Spielerliste (Ø + farbige T·I·P·S·U) ── */
+.rate-row { display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(255,255,255,0.02); border:1px solid var(--card-border); border-radius:10px; margin-bottom:8px; cursor:pointer; transition:background .15s, border-color .15s; }
+.rate-row:hover { background:rgba(255,255,255,0.05); }
+.rate-row.sel { border-color:var(--primary); background:rgba(226,125,56,0.08); }
+.rate-row-main { flex:1; min-width:0; display:flex; align-items:center; gap:8px; }
+.rate-row-nr { flex:0 0 auto; min-width:26px; text-align:center; font-size:11px; font-weight:900; color:var(--primary); background:rgba(226,125,56,0.12); border-radius:6px; padding:3px 5px; }
+.rate-row-name { font-size:12.5px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.rate-row-side { display:flex; align-items:center; gap:9px; flex:0 0 auto; }
+.tipsu-letters { display:inline-flex; gap:3px; }
+.tipsu-dot { width:17px; height:17px; border-radius:5px; font-size:9px; font-weight:900; display:inline-flex; align-items:center; justify-content:center; }
+.rate-row-avg { font-size:12px; font-weight:900; min-width:48px; text-align:right; }
 </style>
 </head>
 <body>
@@ -897,13 +909,19 @@ select.inp option {
      Header
      ════════════════════════════════════════════════════════════════ -->
   <header class="app-header">
-    <div class="logo-txt" id="app-logo-title">TIPS/U LocalAPP</div>
+    <div style="display:flex; flex-direction:column; line-height:1; min-width:0;">
+      <div class="logo-txt" id="app-logo-title">PrefOS</div>
+      <div style="font-size:8px; font-weight:700; letter-spacing:0.08em; color:var(--text-muted); text-transform:uppercase; margin-top:3px; white-space:nowrap;">local · sicher · by Dogus Kaplan</div>
+    </div>
     <div style="display: flex; gap: 6px; align-items: center;">
       <span id="db-status-badge" class="badge" style="background: rgba(5, 150, 105, 0.15); color: #34d399; font-size: 8px; display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s;">
         <span style="width: 6px; height: 6px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #34d399;"></span>
         Gesichert
       </span>
       <span class="badge" style="background: rgba(224, 123, 57, 0.1); color: var(--primary); font-size: 8px;">100% Offline</span>
+      <button onclick="openInfoModal()" aria-label="Über PrefOS" title="Über PrefOS" style="width:30px; height:30px; border-radius:8px; border:1px solid var(--card-border); background:rgba(255,255,255,0.04); cursor:pointer; display:grid; place-items:center; flex-shrink:0; padding:0;">
+        <svg style="width:16px; height:16px; stroke:var(--primary); fill:none;" viewBox="0 0 24 24" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </button>
     </div>
   </header>
 
@@ -1124,6 +1142,18 @@ select.inp option {
         <select id="select-rate-player" class="inp" onchange="loadPlayerRating()" style="font-weight: 700;">
           <option value="">— Bitte Spieler wählen —</option>
         </select>
+      </div>
+
+      <div class="card" id="rate-list-card">
+        <div class="card-title" style="margin-bottom:10px; justify-content:space-between;">
+          <span style="display:inline-flex; align-items:center; gap:8px;">
+            <svg style="width:16px;height:16px;stroke:var(--primary);fill:none;" viewBox="0 0 24 24" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Alle Spieler
+          </span>
+          <span class="badge" style="background:rgba(226,125,56,0.12); color:var(--primary);"><span id="rate-player-count">0</span> Spieler</span>
+        </div>
+        <div style="font-size:9px; color:var(--text-muted); margin-bottom:10px; letter-spacing:0.02em;">Tippe auf einen Spieler, um ihn direkt zu bewerten (Noten 1–4). Farben: <span style="color:var(--accent-red);font-weight:800;">1</span> · <span style="color:var(--primary);font-weight:800;">2</span> · <span style="color:var(--accent-green);font-weight:800;">3</span> · <span style="color:var(--accent-blue);font-weight:800;">4</span></div>
+        <div id="rate-player-list"></div>
       </div>
 
       <div id="rating-editor-card" class="card" style="display: none;">
@@ -1646,7 +1676,7 @@ select.inp option {
         </details>
       </div>
 
-      <p style="text-align:center; font-size:8px; color:var(--text-muted); margin-top:4px;">© 2017 SFV · Spielphilosophie Männer D</p>
+      <p style="text-align:center; font-size:8px; color:var(--text-muted); margin-top:4px;">© 2017 SFV · Spielphilosophie</p>
     </section>
 
   </div>
@@ -1698,6 +1728,32 @@ select.inp option {
         <button class="tk-btn tk-btn--ghost" id="tk-confirmNo" style="margin-bottom:0;">Abbrechen</button>
         <button class="tk-btn tk-btn--accent" id="tk-confirmYes" style="margin-bottom:0;">OK</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Über PrefOS (Info-Fenster) -->
+  <div class="tk-modal-overlay" id="info-modal" hidden onclick="if(event.target===this) closeInfoModal()">
+    <div class="tk-modal" role="dialog" aria-modal="true" style="max-width:420px;">
+      <div style="text-align:center; margin-bottom:14px;">
+        <div class="logo-txt" style="font-size:30px;">PrefOS</div>
+        <div style="font-size:10px; font-weight:800; letter-spacing:0.12em; color:var(--text-muted); text-transform:uppercase; margin-top:5px;">Free Training &amp; Tournament Tool</div>
+      </div>
+      <div style="height:1px; background:var(--card-border); margin:0 0 14px;"></div>
+      <div style="font-size:12.5px; line-height:1.7;">
+        <div style="display:flex; justify-content:space-between; gap:10px; margin-bottom:7px;"><span style="color:var(--text-muted);">Design &amp; Entwicklung</span><strong>Dogus Kaplan</strong></div>
+        <div style="display:flex; justify-content:space-between; gap:10px; margin-bottom:7px;"><span style="color:var(--text-muted);">Herkunft</span><strong>Schweiz 🇨🇭</strong></div>
+        <div style="display:flex; justify-content:space-between; gap:10px;"><span style="color:var(--text-muted);">TIPS/U-Methodik</span><strong>© SFV</strong></div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:16px 0;">
+        <span class="badge" style="background:rgba(5,150,105,0.15); color:#34d399;">Gratis für alle</span>
+        <span class="badge" style="background:rgba(226,125,56,0.12); color:var(--primary);">100% Offline</span>
+        <span class="badge">Keine Registrierung</span>
+        <span class="badge">Keine Werbung</span>
+      </div>
+      <p style="font-size:10.5px; color:var(--text-muted); text-align:center; line-height:1.55; margin-bottom:16px;">
+        Entwickelt von Dogus Kaplan für Trainerinnen und Trainer, Vereine und Sportler – frei und kostenlos nutzbar, ohne Cloud. Alle Daten bleiben sicher auf deinem Gerät.
+      </p>
+      <button class="tk-btn tk-btn--accent" id="info-close" onclick="closeInfoModal()" style="margin-bottom:0;">Schliessen</button>
     </div>
   </div>
 
@@ -1904,6 +1960,10 @@ select.inp option {
       setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
+    // ℹ️ Über-Fenster (Credits)
+    function openInfoModal() { document.getElementById('info-modal').hidden = false; }
+    function closeInfoModal() { document.getElementById('info-modal').hidden = true; }
+
     // ──────────────────────────────────────────────────────────────
     // 👤 KADER-VERWALTUNG (CRUD)
     // ──────────────────────────────────────────────────────────────
@@ -2107,6 +2167,47 @@ select.inp option {
     // ──────────────────────────────────────────────────────────────
     // ⭐ BEWERTUNGS-LOGIK (TIPS/U)
     // ──────────────────────────────────────────────────────────────
+    // Farbe je TIPS/U-Note (1 rot · 2 orange · 3 grün · 4 blau · leer = grau)
+    function tipsuColor(v) {
+      if (v === 1) return 'var(--accent-red)';
+      if (v === 2) return 'var(--primary)';
+      if (v === 3) return 'var(--accent-green)';
+      if (v === 4) return 'var(--accent-blue)';
+      return 'rgba(255,255,255,0.06)';
+    }
+
+    // Immer sichtbare Spielerliste im Bewertungs-Reiter (Ø + farbige T·I·P·S·U)
+    function renderRatePlayerList() {
+      const wrap = document.getElementById('rate-player-list');
+      const countEl = document.getElementById('rate-player-count');
+      if (!wrap) return;
+      const players = APP_STATE.players || [];
+      if (countEl) countEl.textContent = players.length;
+      if (!players.length) {
+        wrap.innerHTML = '<div style="text-align:center;padding:22px;color:var(--text-muted);font-size:11px;">Noch keine Spieler erfasst. Lege sie im Reiter «Kader» an.</div>';
+        return;
+      }
+      const curSel = document.getElementById('select-rate-player').value;
+      const dims = [['technik', 'T'], ['intelligenz', 'I'], ['persoenlichkeit', 'P'], ['schnelligkeit', 'S'], ['umfeld', 'U']];
+      const sorted = [...players].sort((a, b) => parseInt(a.nr || 0) - parseInt(b.nr || 0));
+      wrap.innerHTML = sorted.map(p => {
+        const scores = Object.values(p.ratings).filter(v => v !== null);
+        const avg = scores.length ? (scores.reduce((a, b) => a + b, 0) / scores.length) : null;
+        const avgStr = avg !== null ? avg.toFixed(2) : '—';
+        const avgColor = avg !== null ? tipsuColor(Math.round(avg)) : 'var(--text-muted)';
+        const letters = dims.map(d => {
+          const v = p.ratings[d[0]];
+          const col = v ? '#fff' : 'var(--text-muted)';
+          return '<span class="tipsu-dot" style="background:' + tipsuColor(v) + ';color:' + col + ';" title="' + d[1] + ': ' + (v || '—') + '">' + d[1] + '</span>';
+        }).join('');
+        const sel = (p.id === curSel) ? ' sel' : '';
+        return '<div class="rate-row' + sel + '" data-rate-pick="' + p.id + '">' +
+          '<div class="rate-row-main"><span class="rate-row-nr">' + esc(p.nr || '–') + '</span><span class="rate-row-name">' + esc(p.name || 'Unbenannt') + '</span></div>' +
+          '<div class="rate-row-side"><span class="tipsu-letters">' + letters + '</span><span class="rate-row-avg" style="color:' + avgColor + ';">Ø ' + avgStr + '</span></div>' +
+        '</div>';
+      }).join('');
+    }
+
     function populateRateSelector() {
       const sel = document.getElementById('select-rate-player');
       const dashSel = document.getElementById('dash-print-player');
@@ -2124,6 +2225,7 @@ select.inp option {
       if (curVal && APP_STATE.players.find(x=>x.id===curVal)) { sel.value = curVal; }
       else { document.getElementById('rating-editor-card').style.display = 'none'; }
       if (dashSel && curDashVal && APP_STATE.players.find(x=>x.id===curDashVal)) { dashSel.value = curDashVal; }
+      renderRatePlayerList();
     }
 
     function loadPlayerRating() {
@@ -2141,6 +2243,7 @@ select.inp option {
       card.style.display = 'block';
       syncRatingButtons(p);
       renderBehaviorChecklists(p);
+      renderRatePlayerList();
     }
 
     function syncRatingButtons(player) {
@@ -2166,6 +2269,7 @@ select.inp option {
       if (!p) return;
       if (p.ratings[dim] === scoreVal) { p.ratings[dim] = null; } else { p.ratings[dim] = scoreVal; }
       syncRatingButtons(p);
+      renderRatePlayerList();
       saveStateToLocalStorageBackup();
     }
 
@@ -2345,12 +2449,23 @@ select.inp option {
       }
 
       doc.setFontSize(7.5); doc.setTextColor(140, 140, 140);
-      doc.text('TIPS/U LocalAPP  ·  Offline-sicher generiert', PW - margin, PH - 12, { align: 'right' });
+      doc.text('PrefOS  ·  Offline-sicher generiert', PW - margin, PH - 12, { align: 'right' });
+    }
+
+    // Garantiert, dass die aktuell getippten Trainer-Notizen vor dem PDF-Druck übernommen werden
+    function flushRatingNotes() {
+      const pid = document.getElementById('select-rate-player').value;
+      const ta = document.getElementById('rate-notizen');
+      if (pid && ta) {
+        const p = APP_STATE.players.find(x => x.id === pid);
+        if (p && p.notes !== ta.value) { p.notes = ta.value; saveStateToLocalStorageBackup(); }
+      }
     }
 
     function exportSinglePlayerPDF() {
       const pid = document.getElementById('select-rate-player').value;
       if (!pid) return;
+      flushRatingNotes();
       const p = APP_STATE.players.find(x => x.id === pid);
       if (!p) return;
       const { jsPDF } = window.jspdf;
@@ -2362,6 +2477,7 @@ select.inp option {
 
     function exportAllPlayersPDF() {
       if (!APP_STATE.players || APP_STATE.players.length === 0) { alert('Dein Kader ist aktuell leer. Es gibt keine Spieler zum Exportieren.'); return; }
+      flushRatingNotes();
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
       const players = [...APP_STATE.players];
@@ -2514,14 +2630,14 @@ select.inp option {
     }
     function primaryColor(){ return (getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()) || '#e27d38'; }
 
-    // — Team-Farben / Leibchen-Palette für den Picker —
+    // — Feste Vereine für den Team-Picker (Name + Akzentfarbe) —
     const CLUBS = [
-      { name: 'Rot', color: '#ef4444' }, { name: 'Blau', color: '#3b82f6' },
-      { name: 'Grün', color: '#22c55e' }, { name: 'Gelb', color: '#eab308' },
-      { name: 'Orange', color: '#f97316' }, { name: 'Türkis', color: '#14b8a6' },
-      { name: 'Pink', color: '#ec4899' }, { name: 'Lila', color: '#a855f7' },
-      { name: 'Hellblau', color: '#38bdf8' }, { name: 'Weiss', color: '#e5e7eb' },
-      { name: 'Bordeaux', color: '#fb7185' }, { name: 'Grau', color: '#94a3b8' }
+      { name: 'FC Basel', color: '#e2001a' }, { name: 'PSG', color: '#2056c7' },
+      { name: 'Real Madrid', color: '#e9e9ec' }, { name: 'Barcelona', color: '#b4185a' },
+      { name: 'Ajax', color: '#f4364c' }, { name: 'FC Bayern', color: '#d50032' },
+      { name: 'ManCity', color: '#6cabdd' }, { name: 'BVB', color: '#f4d000' },
+      { name: 'Juventus', color: '#c7ced8' }, { name: 'Arsenal', color: '#ef4444' },
+      { name: 'AC Mailand', color: '#fb4d57' }, { name: 'Lyon', color: '#3b82f6' }
     ];
 
     // — Tapper-Laufzeitstatus (bewusst NICHT persistiert) —
@@ -2552,7 +2668,7 @@ select.inp option {
     function openClubPicker(){
       const ov = document.getElementById('tk-sheet');
       ov.dataset.mode = 'club';
-      openSheet('Team / Farbe wählen');
+      openSheet('Team / Verein wählen');
       let html = '<div class="tk-field"><input type="text" id="tk-customTeam" placeholder="Eigener Team-Name …" maxlength="22"><button class="tk-icon-btn" data-customadd="1" aria-label="Hinzufügen" style="width:50px;">＋</button></div>';
       html += '<div class="tk-club-grid">';
       CLUBS.forEach(c => { html += '<button class="tk-club-btn" style="--cc:' + c.color + ';" data-clubname="' + esc(c.name) + '" data-clubcolor="' + c.color + '">' + esc(c.name) + '</button>'; });
@@ -2931,7 +3047,7 @@ select.inp option {
       const PH = doc.internal.pageSize.getHeight();
       const PW = doc.internal.pageSize.getWidth();
       doc.setFontSize(7.5); doc.setTextColor(140, 140, 140);
-      doc.text('TIPS/U LocalAPP  ·  Offline-sicher generiert', PW - 14, PH - 12, { align: 'right' });
+      doc.text('PrefOS  ·  Offline-sicher generiert', PW - 14, PH - 12, { align: 'right' });
     }
     function exportRankingPDF(){
       const players = APP_STATE.players.filter(Boolean);
@@ -3149,6 +3265,19 @@ select.inp option {
       renderDashboardStats();
       renderKaderList();
       populateRateSelector();
+
+      // Klick auf einen Spieler in der Bewertungs-Liste -> direkt in den Editor laden
+      const rateList = document.getElementById('rate-player-list');
+      if (rateList) {
+        rateList.addEventListener('click', (e) => {
+          const row = e.target.closest('[data-rate-pick]');
+          if (!row) return;
+          document.getElementById('select-rate-player').value = row.dataset.ratePick;
+          loadPlayerRating();
+          const ed = document.getElementById('rating-editor-card');
+          if (ed) ed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
 
       // 3) Wettkampf-Modul verdrahten und initial rendern
       tkBind();
